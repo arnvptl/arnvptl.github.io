@@ -5,7 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>riprnv</title>  
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css>
-<style>body,textarea{box-sizing:border-box}body{font-family:Karla,sans-serif;color:#31353f;margin:10px;text-align:center;font-size:27.5px;background-position:center center;background-color:#e26851}.main,.submit,a{color:#e26851;background-color:#31353f;font-size:27px}a:hover,summary:hover{transform:scale(1.03)}.main,a{display:block;max-width:750px;padding:15px 25px;border-radius:18.75px;text-decoration:none;font-weight:600}.icon-container{display:flex;justify-content:center}.icon-container a{margin:0 10px}textarea{border:5px solid #31353f;outline:transparent;padding:9px;background-color:#ff7c63;font-size:20px;border-radius:10px;color:#31353f;resize:none;width:85%;max-width:600px}.submit{height:45px;border:0;border-radius:5px;font-family:sans-serif;padding:8px 25px}
+<style>body,textarea{box-sizing:border-box}body{font-family:Karla,sans-serif;color:#31353f;margin:10px;text-align:center;font-size:27.5px;background-position:center center;background-color:#e26851}.main,.submit,a{color:#e26851;background-color:#31353f;font-size:27px}a:hover,summary:hover{transform:scale(1.03)}.main,a{display:block;max-width:750px;padding:15px 25px;border-radius:18.75px;text-decoration:none;font-weight:600}.icon-container{display:flex;justify-content:center}.icon-container a{margin:0 10px}textarea{border:5px solid #31353f;outline:transparent;padding:9px;background-color:#ff7c63;font-size:20px;border-radius:10px;color:#31353f;resize:none;width:85%;max-width:600px}.submit{height:45px;border:0;border-radius:5px;font-family:sans-serif;padding:8px 25px}.submit:hover {
+    transform: scale(1.03);
+}
+
+.submit:active {
+    transform: scale(0.9);
+}
+
+#msg{
+  font-size: 20px;
+}
 </style>
 </head>
 <body>
@@ -20,13 +30,41 @@
   
   <div>
     <form id="form">
-      <textarea name="q" cols="40" rows="7" placeholder="Ask a question" required></textarea>
+      <textarea name="q" cols="40" rows="7" placeholder="Ask a question" required minlength="20"></textarea>
       <img src="//2no.co/rnv">
       <br>
-      <button type="submit" class="submit"><i class="fa-solid fa-paper-plane"></i></button>
+      <button type="submit" class="submit">Send</button>
+      <p id="msg" style="display:none">Sending...</p>
     </form>
   </div>
 
-  <script>var form=document.getElementById("form"),textarea=document.getElementsByName("q")[0],submitButton=document.querySelector(".submit"),showMessage=e=>{var t=document.createElement("p");return t.textContent=e,form.parentNode.insertBefore(t,form.nextSibling),t};form.addEventListener("submit",function(e){e.preventDefault(),fetch("//formsubmit.co/ajax/d4b60d33559bc3ec13ad5b944b17f44c",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({message:textarea.value})}).then(e=>e.json()).then(e=>{console.log("API Response:",e),textarea.value="",submitButton.style.display="none",showMessage("Sent!")})});</script>
+  <script>    
+var btn = document.getElementsByClassName('submit')[0];
+   var form = document.getElementById('form');
+    var msg = document.getElementById('msg');
+    var textarea = document.getElementsByName('q')[0];
+    form.addEventListener('submit', function(event) {
+      btn.style.display = 'none';
+      msg.style.display = 'block';
+      
+      event.preventDefault();
+      var data = textarea.value;
+      fetch("https://formsubmit.co/ajax/d4b60d33559bc3ec13ad5b944b17f44c", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          message: data
+        })
+      })
+      .then(result => {
+        console.log("API Response:", result);
+        textarea.style.display = 'none';
+        msg.textContent = "Sent!";
+      })
+    });
+</script>
 </body>
 </html>
