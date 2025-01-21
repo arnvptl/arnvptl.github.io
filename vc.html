@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang=en>
+<head>
+<meta charset=UTF-8 />
+<meta name=viewport content="width=device-width, initial-scale=1.0" />
+<script src=https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.1.2/adapter.min.js integrity="sha512-l40eBFtXx+ve5RryIELC3y6/OM6Nu89mLGQd7fg1C93tN6XrkC3supb+/YiD/Y+B8P37kdJjtG1MT1kOO2VzxA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+</head>
+<body>
+<div class=grid>
+<h1>Calls Echo Demo</h1>
+<div>
+<h2>Local stream</h2>
+<video id=local-video autoplay muted></video>
+</div>
+<div>
+<h2>Remote echo stream</h2>
+<video id=remote-video autoplay></video>
+</div>
+</div>
+<script type=module>
+  const appId = "c4f81f339b295d9893bd879f1e771dfc";
+const appSecret =
+  "2adbe963e0eacfa99674b7b2a9156696bc71439f4fc93fef71f315f905274d81";
+class CallsApp {
+  constructor(appId, basePath = "https://rtc.live.cloudflare.com/v1") {
+    this.prefixPath = `${basePath}/apps/${appId}`;
+  }
+  async sendRequest(url, body, method = "POST") {
+    const request = {
+      method: method,
+      mode: "cors",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${appSecret}`,
+      },
+      body: JSON.stringify(body),
+    };
+    const response = await fetch(url, request);
+    const result = await response.json();
+    return result;
+  }
+  checkErrors(result, tracksCount = 0) {
+    if (result.errorCode) {
+      throw new Error(result.errorDescription);
+    }
+    for (let i = 0; i < tracksCount; i++) {
+      if (result.tracks[i].errorCode) {
+        throw new Error(`tracks[${i}]:${result.tracks[i].errorDescription}`);
+      }
+    }
+  }
+  async newSession(offerSDP) {
+    const url = `${this.prefixPath}/sessions/new`;
+    const body = { sessionDescription: { type: "offer", sdp: offerSDP } };
+    const result = await this.sendRequest(url, body);
+    this.checkErrors(result);
+    this.sessionId = result.sessionId;
+    return result;
+  }
+  async newTracks(trackObjects, offerSDP = null) {
+    const url = `${this.prefixPath}/sessions/${this.sessionId}/tracks/new`;
+    const body = {
+      sessionDescription: { type: "offer", sdp: offerSDP },
+      tracks: trackObjects,
+    };
+    if (!offerSDP) {
+      delete body["sessionDescription"];
+    }
+    const result = await this.sendRequest(url, body);
+    this.checkErrors(result, trackObjects.length);
+    return result;
+  }
+  async sendAnswerSDP(answer) {
+    const url = `${this.prefixPath}/sessions/${this.sessionId}/renegotiate`;
+    const body = { sessionDescription: { type: "answer", sdp: answer } };
+    const result = await this.sendRequest(url, body, "PUT");
+    this.checkErrors(result);
+  }
+}
+self.pc = new RTCPeerConnection({
+  iceServers: [{ urls: "stun:stun.cloudflare.com:3478" }],
+  bundlePolicy: "max-bundle",
+});
+const localStream = await navigator.mediaDevices.getUserMedia({
+  video: true,
+  audio: true,
+});
+const localVideoElement = document.getElementById("local-video");
+localVideoElement.srcObject = localStream;
+self.transceivers = localStream
+  .getTracks()
+  .map((track) => self.pc.addTransceiver(track, { direction: "sendonly" }));
+self.app = new CallsApp(appId);
+await self.pc.setLocalDescription(await self.pc.createOffer());
+const newSessionResult = await self.app.newSession(
+  self.pc.localDescription.sdp,
+);
+await self.pc.setRemoteDescription(
+  new RTCSessionDescription(newSessionResult.sessionDescription),
+);
+await new Promise((resolve, reject) => {
+  self.pc.addEventListener("iceconnectionstatechange", (ev) => {
+    if (ev.target.iceConnectionState === "connected") {
+      resolve();
+    }
+    setTimeout(reject, 5000, "connect timeout");
+  });
+});
+let trackObjects = self.transceivers.map((transceiver) => {
+  return {
+    location: "local",
+    mid: transceiver.mid,
+    trackName: transceiver.sender.track.id,
+  };
+});
+await self.pc.setLocalDescription(await self.pc.createOffer());
+const newLocalTracksResult = await self.app.newTracks(
+  trackObjects,
+  self.pc.localDescription.sdp,
+);
+await self.pc.setRemoteDescription(
+  new RTCSessionDescription(newLocalTracksResult.sessionDescription),
+);
+trackObjects = trackObjects.map((trackObject) => {
+  return {
+    location: "remote",
+    sessionId: self.app.sessionId,
+    trackName: trackObject.trackName,
+  };
+});
+const remoteTracksPromise = new Promise((resolve) => {
+  let tracks = [];
+  self.pc.ontrack = (event) => {
+    tracks.push(event.track);
+    console.debug(`Got track mid=${event.track.mid}`);
+    if (tracks.length >= 2) {
+      resolve(tracks);
+    }
+  };
+});
+const newRemoteTracksResult = await self.app.newTracks(trackObjects);
+if (newRemoteTracksResult.requiresImmediateRenegotiation) {
+  switch (newRemoteTracksResult.sessionDescription.type) {
+    case "offer":
+      await self.pc.setRemoteDescription(
+        new RTCSessionDescription(newRemoteTracksResult.sessionDescription),
+      );
+      await self.pc.setLocalDescription(await self.pc.createAnswer());
+      await self.app.sendAnswerSDP(self.pc.localDescription.sdp);
+      break;
+    case "answer":
+      throw new Error("An offer SDP was expected");
+  }
+}
+const remoteTracks = await remoteTracksPromise;
+const remoteVideoElement = document.getElementById("remote-video");
+const remoteStream = new MediaStream();
+remoteStream.addTrack(remoteTracks[0]);
+remoteStream.addTrack(remoteTracks[1]);
+remoteVideoElement.srcObject = remoteStream;
+   </script>
+<style>html{color-scheme:light dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;background:white;color:black}body,h1,h2{margin:0}h1,h2{font-weight:400}h1{font-size:1.5rem;grid-column:1 / -1}h2{font-size:1rem;margin-bottom:.5rem}video{width:100%}.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem}@media(max-width:500px){.grid{grid-template-columns:minmax(0,1fr)}}</style>
+</body>
+</html>
