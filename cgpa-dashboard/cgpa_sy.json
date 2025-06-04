@@ -4216,5 +4216,82 @@
         "email": "skvskv8745@gmail.com",
         "cgpa": "7.45",
         "branch": "B.Tech. - ME, Sem 3"
+    },
+    {
+        "roll_number": "2302111107",
+        "username": "NALLAMANDU MAHEWISH  SAYEED AHMED",
+        "email": "unknown@gmail.com",
+        "cgpa": "9.73",
+        "branch": "B.Tech. - CS, Sem 3"
+    },
+    {
+        "roll_number": "2302111152",
+        "username": "KOTHARI JAINAM",
+        "email": "unknown@gmail.com",
+        "cgpa": "9.22",
+        "branch": "B.Tech. - CS, Sem 3"
+    },
+    {
+        "roll_number": "2302111182",
+        "username": "PATANGE KAUSTUBH  MAHESH",
+        "email": "unknown@gmail.com",
+        "cgpa": "9.09",
+        "branch": "B.Tech. - CS, Sem 3"
+    },
+    {
+        "roll_number": "2302111187",
+        "username": "VISHAL  KUMAR",
+        "email": "unknown@gmail.com",
+        "cgpa": "9.72",
+        "branch": "B.Tech. - CS, Sem 3"
+    },
+    {
+        "roll_number": "2302111193",
+        "username": "Samal Varsha Srinivas",
+        "email": "unknown@gmail.com",
+        "cgpa": "8.66",
+        "branch": "B.Tech. - CS, Sem 3"
+    },
+    {
+        "roll_number": "2303111012",
+        "username": "PATIL TANMAY     SHASHIKANT",
+        "email": "unknown@gmail.com",
+        "cgpa": "7.92",
+        "branch": "B.Tech. - EE, Sem 3"
+    },
+    {
+        "roll_number": "2304111048",
+        "username": "JAIN DIVAY RITESH",
+        "email": "unknown@gmail.com",
+        "cgpa": "9.59",
+        "branch": "B.Tech. - EC, Sem 3"
+    },
+    {
+        "roll_number": "2304111072",
+        "username": "DUDHANKAR NEHAL  MILIND",
+        "email": "unknown@gmail.com",
+        "cgpa": "9.83",
+        "branch": "B.Tech. - EC, Sem 3"
+    },
+    {
+        "roll_number": "2305111004",
+        "username": "KONDEKAR SHLOK   ABHINANDAN",
+        "email": "unknown@gmail.com",
+        "cgpa": "9.56",
+        "branch": "B.Tech. - IT, Sem 3"
+    },
+    {
+        "roll_number": "2305111072",
+        "username": "ADONE VARAD  GOVIND",
+        "email": "unknown@gmail.com",
+        "cgpa": "9.3",
+        "branch": "B.Tech. - IT, Sem 3"
+    },
+    {
+        "roll_number": "2306111036",
+        "username": "BARGAJE TAPAN  ASHISH",
+        "email": "unknown@gmail.com",
+        "cgpa": "9.61",
+        "branch": "B.Tech. - ME, Sem 3"
     }
 ]
