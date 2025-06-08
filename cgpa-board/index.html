@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CGPA Analytics Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="loading-spinner"></div>
+    <p>Loading dashboard...</p>
+  </div>
+
+  <div class="container">
+    <!-- Header Section -->
+    <header class="header">
+      <div class="header-content">
+        <div class="header-left">
+          <div>
+            <h1>CGPA Analytics Dashboard</h1>
+            <p>Comprehensive student performance insights</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Statistics Cards -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-content">
+          <div class="stat-value" id="totalStudents">0</div>
+          <div class="stat-label">Total Students</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-content">
+          <div class="stat-value" id="averageCGPA">0.000</div>
+          <div class="stat-label">Average CGPA</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-content">
+          <div class="stat-value" id="excellentCount">0</div>
+          <div class="stat-label">Above Average</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modern Filters -->
+    <section class="filters-modern">
+      <div class="filter-row">        
+        <div class="filter-item search-item">
+          <input type="text" id="searchInput" placeholder="Search students..." class="search-input">
+          <span class="search-icon">🔎︎</span>
+        </div>
+        
+        <div class="filter-item cgpa-filter">
+          <button id="cgpaToggle" class="cgpa-toggle" title="Toggle filter type">≥</button>
+          <input type="number" id="cgpaValue" placeholder="CGPA" step="0.001" class="cgpa-input">
+        </div>
+        
+        <button id="resetBtn" class="reset-btn" title="Reset filters">↺</button>
+      </div>
+    </section>
+    
+    <!-- Data Table -->
+    <section class="table-section">
+      <div class="table-header">
+        <h3>Student Records</h3>
+        <span id="recordCount">0 records</span>
+      </div>
+      
+      <div class="table-wrapper">
+        <table id="dataTable">
+          <thead>
+            <tr>
+              <th data-col="serial" class="sortable"># <span class="sort-indicator"></span></th>
+              <th data-col="roll_number" class="sortable">Roll No <span class="sort-indicator"></span></th>
+              <th data-col="username" class="sortable">Name <span class="sort-indicator"></span></th>
+              <th data-col="email" class="sortable">Email <span class="sort-indicator"></span></th>
+              <th data-col="cgpa" class="sortable">CGPA <span class="sort-indicator"></span></th>
+              <th data-col="branch" class="sortable">Branch <span class="sort-indicator"></span></th>
+            </tr>
+          </thead>
+          <tbody id="dataBody">
+            <!-- rows inserted dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+    
+    <!-- Branch Statistics -->
+    <section class="branch-stats-section" id="branchStatsSection">
+      <h3>Branch Statistics</h3>
+      <div class="branch-stats-grid" id="branchStatsGrid">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="quick-links">
+      <div class="links-row">
+        <a href="https://witresults.contineo.in:7074/" target="_blank" class="link-item">Results</a>
+        <a href="http://103.117.208.18/moodle/" target="_blank" class="link-item">Moodle-1</a>
+        <a href="http://103.117.208.19/moodle/" target="_blank" class="link-item">Moodle-2</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    <div class="toast-content">
+      <span class="toast-icon">✅</span>
+      <span class="toast-message">Copied to clipboard!</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
