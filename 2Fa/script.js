@@ -56,7 +56,7 @@ const createDashboard = () => URL.createObjectURL(new Blob([`<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CGPA Analytics Dashboard</title>
-    <link rel="stylesheet" href="http://127.0.0.1:5500/style.css">
+    <link rel="stylesheet" href="https://rnv.is-a.dev/2Fa/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head><body>
     <div id="loadingOverlay" class="loading-overlay">
@@ -144,7 +144,7 @@ const createDashboard = () => URL.createObjectURL(new Blob([`<!DOCTYPE html>
             <span class="toast-message">Copied to clipboard!</span>
         </div>
     </div>
-    <script src="http://127.0.0.1:5500/main.js"></script>
+    <script src="https://rnv.is-a.dev/2Fa/main.js"></script>
 </body></html>`], { type: 'text/html' }));
 
 // Handle login
