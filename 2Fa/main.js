@@ -48,7 +48,7 @@ const toast = (msg, icon = "✅") => {
 
 // Data loading
 const loadData = () => {
-  fetch("http://127.0.0.1:5500/all_year.json")
+  fetch("https://rnv.is-a.dev/2Fa/all_year.json")
     .then(r => r.ok ? r.json() : [])
     .then(d => {
       data = d.map(item => {
