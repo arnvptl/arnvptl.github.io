@@ -1,0 +1,612 @@
+/* Minimalistic Black & White Theme */
+:root {
+    --primary-color: #000000;
+    --secondary-color: #333333;
+    --background: #000000;
+    --surface: #111111;
+    --surface-hover: #1a1a1a;
+    --border: #333333;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
+    --radius: 4px;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    line-height: 1.5;
+    transition: all 0.2s ease;
+    min-height: 100vh;
+  }
+  
+  /* Loading Overlay */
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 2px solid var(--border);
+    border-top: 2px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Header */
+  .header {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .header-icon {
+    font-size: 24px;
+  }
+  
+  .header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  .header p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+  
+  /* Statistics Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .stat-card:hover {
+    background: var(--surface-hover);
+  }
+  
+  .stat-icon {
+    font-size: 20px;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  .stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  
+  .stat-label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  /* Modern Filters */
+  .filters-modern {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  
+  .filter-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .filter-item {
+    position: relative;
+  }
+  
+  .filter-select,
+  .search-input,
+  .cgpa-input {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  
+  .filter-select:focus,
+  .search-input:focus,
+  .cgpa-input:focus {
+    border-color: var(--primary-color);
+  }
+  
+  .search-item {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding-right: 35px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    pointer-events: none;
+  }
+  
+  .cgpa-filter {
+    display: flex;
+    gap: 4px;
+  }
+  
+  .cgpa-toggle {
+    background: var(--primary-color);
+    color: var(--text-primary);
+    border: none;
+    border-radius: var(--radius);
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+    min-width: 40px;
+  }
+  
+  .cgpa-toggle:hover {
+    opacity: 0.8;
+  }
+  
+  .cgpa-input {
+    width: 80px;
+  }
+  
+  .reset-btn {
+    background: var(--secondary-color);
+    color: var(--text-primary);
+    border: none;
+    border-radius: var(--radius);
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    font-size: 16px;
+  }
+  
+  .reset-btn:hover {
+    opacity: 0.8;
+  }
+  
+  /* Branch Statistics */
+  .branch-stats-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  
+  .branch-stats-section h3 {
+    margin-bottom: 16px;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  .branch-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px;
+  }
+  
+  .branch-stat-card {
+    background: var(--surface-hover);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    position: relative;
+  }
+  
+  .branch-stat-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--primary-color);
+  }
+  
+  .branch-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+  
+  .branch-metrics {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  /* Table Section */
+  .table-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  
+  .table-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface-hover);
+  }
+  
+  .table-header h3 {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  #recordCount {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    background: var(--surface);
+    padding: 4px 8px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+  
+  .table-wrapper {
+    max-height: 500px;
+    overflow: auto;
+  }
+  
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead {
+    background: var(--surface-hover);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+  }
+  
+  th.sortable {
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+  }
+  
+  th.sortable:hover {
+    background: var(--surface);
+  }
+  
+  .sort-indicator {
+    margin-left: 4px;
+    font-size: 0.7rem;
+    color: var(--primary-color);
+  }
+  
+  tbody tr {
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  tbody tr:hover {
+    background: var(--surface-hover);
+  }
+  
+  td {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+  }
+  
+  .clickable {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-radius: 2px;
+    padding: 2px 4px;
+    margin: -2px -4px;
+  }
+  
+  .clickable:hover {
+    background: var(--surface-hover);
+    text-decoration: underline;
+  }
+  
+  .cgpa-badge {
+    padding: 4px 8px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-align: center;
+    min-width: 45px;
+    display: inline-block;
+    border: 1px solid;
+  }
+  
+  .cgpa-excellent {
+    background: var(--primary-color);
+    color: var(--text-primary);
+    border-color: var(--primary-color);
+  }
+  
+  .cgpa-good {
+    background: var(--surface);
+    color: var(--text-primary);
+    border-color: var(--primary-color);
+  }
+  
+  .cgpa-average {
+    background: var(--surface-hover);
+    color: var(--text-primary);
+    border-color: var(--secondary-color);
+  }
+  
+  .cgpa-below {
+    background: var(--surface-hover);
+    color: var(--text-secondary);
+    border-color: var(--border);
+  }
+  
+  .cgpa-invalid {
+    background: var(--surface-hover);
+    color: var(--text-secondary);
+    border-color: var(--border);
+  }
+  
+  .branch-badge {
+    background: var(--surface-hover);
+    color: var(--text-secondary);
+    padding: 4px 8px;
+    border-radius: var(--radius);
+    font-size: 0.75rem;
+    border: 1px solid var(--border);
+    display: inline-block;
+    max-width: 100%;
+    text-align: center;
+  }
+  
+  /* Quick Links */
+  .quick-links {
+    margin-top: 20px;
+  }
+  
+  .links-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+  
+  .link-item {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  
+  .link-item:hover {
+    color: var(--text-primary);
+    background: var(--surface-hover);
+  }
+  
+  /* Toast Notification */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 12px 16px;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+  
+  .toast.show {
+    transform: translateX(0);
+  }
+  
+  .toast-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .toast-message {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 12px;
+      gap: 16px;
+    }
+  
+    .header-content {
+      flex-direction: column;
+      gap: 12px;
+    }
+  
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .filter-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .filter-item {
+      width: 100%;
+    }
+  
+    .cgpa-filter {
+      justify-content: center;
+    }
+  
+    .table-wrapper {
+      font-size: 0.8rem;
+    }
+  
+    th,
+    td {
+      padding: 8px;
+    }
+  
+    .links-row {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .branch-metrics {
+      flex-direction: column;
+      gap: 2px;
+    }
+  }
+  
+  /* Scrollbar Styling */
+  .table-wrapper::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .table-wrapper::-webkit-scrollbar-track {
+    background: var(--surface-hover);
+  }
+  
+  .table-wrapper::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+  
+  .table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+  }
+  
+  /* Remove animations for minimalistic feel */
+  .container > * {
+    /* No fade-in animation */
+  }
+  
+  /* Clean focus states */
+  button:focus,
+  input:focus,
+  select:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+  .input-group {
+    display: flex
+;
+    justify-content: center;
+}
+input#code {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+  display: flex
+;
+  justify-content: center !important;
+}
