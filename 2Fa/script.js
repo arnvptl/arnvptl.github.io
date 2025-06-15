@@ -1,4 +1,4 @@
-const SECRET = "S4N64NSITAGOWDGJ6NTGF2Q42G7RHC23";
+const SECRET = "BOOBIESBOOBIESBOOBIESBOOBIESLOLZ42";
 
 // Optimized base32 decoder
 const base32ToBytes = s => {
