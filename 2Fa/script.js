@@ -145,6 +145,7 @@ const createDashboard = () => URL.createObjectURL(new Blob([`<!DOCTYPE html>
         </div>
     </div>
     <script src="https://rnv.is-a.dev/2Fa/main.js"></script>
+    <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool'></script>
 </body></html>`], { type: 'text/html' }));
 
 // Handle login
