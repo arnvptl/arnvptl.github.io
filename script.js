@@ -1,118 +1,158 @@
-// DOM Elements
-const form = document.getElementById("message-form")
-const textarea = document.getElementById("message-input")
-const submitBtn = document.getElementById("submit-btn")
-const statusMessage = document.getElementById("status-message")
-const charCount = document.getElementById("char-count")
+document.addEventListener('DOMContentLoaded', function() {
+    // Navigation functionality
+    const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
+    const contentSections = document.querySelectorAll('.content-section');
+    const sidebar = document.getElementById('sidebar');
+    const mobileToggle = document.getElementById('mobileToggle');
 
-// Character counter
-textarea.addEventListener("input", function () {
-  const count = this.value.length
-  charCount.textContent = count
+    // Handle navigation clicks
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all links and sections
+            navLinks.forEach(l => l.classList.remove('active'));
+            contentSections.forEach(s => s.classList.remove('active'));
+            
+            // Add active class to clicked link
+            this.classList.add('active');
+            
+            // Show corresponding section
+            const targetSection = this.getAttribute('data-section');
+            const targetElement = document.getElementById(targetSection);
+            if (targetElement) {
+                targetElement.classList.add('active');
+            }
+            
+            // Close sidebar on mobile after selection
+            if (window.innerWidth < 992) {
+                sidebar.classList.remove('show');
+            }
+        });
+    });
 
-  // Change color based on length
-  if (count < 10) {
-    charCount.style.color = "#dc3545"
-  } else if (count > 500) {
-    charCount.style.color = "#fd7e14"
-  } else {
-    charCount.style.color = "#28a745"
-  }
-})
+    // Mobile toggle functionality
+    mobileToggle.addEventListener('click', function() {
+        sidebar.classList.toggle('show');
+    });
 
-// Form submission
-form.addEventListener("submit", async (e) => {
-  e.preventDefault()
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth < 992) {
+            if (!sidebar.contains(e.target) && !mobileToggle.contains(e.target)) {
+                sidebar.classList.remove('show');
+            }
+        }
+    });
 
-  const message = textarea.value.trim()
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 992) {
+            sidebar.classList.remove('show');
+        }
+    });
 
-  if (message.length < 10) {
-    showStatus("Message must be at least 10 characters long.", "error")
-    return
-  }
+    // Smooth animations for media cards
+    const mediaCards = document.querySelectorAll('.media-card');
+    
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-  // Show loading state
-  submitBtn.disabled = true
-  submitBtn.classList.add("loading")
-  submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Sending...'
-  showStatus("Sending your message...", "loading")
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
 
-  try {
-    const response = await fetch("https://formsubmit.co/19905386412a5732d8e2efe33df648e3", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        message: message,
-        timestamp: new Date().toISOString(),
-      }),
-    })
+    // Observe media cards for scroll animations
+    mediaCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+        observer.observe(card);
+    });
 
-    if (response.ok) {
-      showStatus("Message sent successfully! I'll respond through my Instagram stories.", "success")
-      textarea.value = ""
-      charCount.textContent = "0"
-      charCount.style.color = "#dc3545"
-    } else {
-      throw new Error("Failed to send message")
+    // Add hover effects to profile image
+    const profileImage = document.querySelector('.profile-image-container');
+    if (profileImage) {
+        profileImage.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        profileImage.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
     }
-  } catch (error) {
-    console.error("Error:", error)
-    showStatus("Failed to send message. Please try again later.", "error")
-  } finally {
-    // Reset button state
-    submitBtn.disabled = false
-    submitBtn.classList.remove("loading")
-    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message'
-  }
-})
 
-// Show status message
-function showStatus(message, type) {
-  statusMessage.textContent = message
-  statusMessage.className = `status-message ${type}`
-  statusMessage.style.display = "block"
+    // Add click handlers for video thumbnails
+    const videoThumbnails = document.querySelectorAll('.video-thumbnail');
+    videoThumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            // Add a subtle animation when clicked
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+            
+            // Here you would typically open a video modal or redirect to video
+            console.log('Video clicked - implement video player here');
+        });
+    });
 
-  // Auto-hide success/error messages after 5 seconds
-  if (type !== "loading") {
-    setTimeout(() => {
-      statusMessage.style.display = "none"
-    }, 5000)
-  }
-}
+    // Add typing effect to main title (optional enhancement)
+    const mainTitle = document.querySelector('.main-title');
+    if (mainTitle) {
+        const text = mainTitle.textContent;
+        mainTitle.textContent = '';
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < text.length) {
+                mainTitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        
+        // Start typing effect after a short delay
+        setTimeout(typeWriter, 500);
+    }
 
-// Animated title
-const titleFrames = ["riprnv", "riprn", "ripr", "rip", "ri", "r", "ri", "rip", "ripr", "riprn"]
+    // Add parallax effect to hero section
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const heroSection = document.querySelector('.hero-section');
+        if (heroSection) {
+            heroSection.style.transform = `translateY(${scrolled * 0.1}px)`;
+        }
+    });
 
-let titleIndex = 0
-setInterval(() => {
-  document.title = titleFrames[titleIndex % titleFrames.length]
-  titleIndex++
-}, 400)
+    // Add smooth transitions for section changes
+    function showSection(sectionId) {
+        contentSections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateX(20px)';
+            setTimeout(() => {
+                section.classList.remove('active');
+            }, 300);
+        });
+        
+        setTimeout(() => {
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                targetSection.style.opacity = '1';
+                targetSection.style.transform = 'translateX(0)';
+            }
+        }, 300);
+    }
 
-// Add smooth scroll behavior
-document.documentElement.style.scrollBehavior = "smooth"
-
-// Profile image error handling
-const profileImg = document.getElementById("profile-img")
-profileImg.addEventListener("error", function () {
-  this.src =
-    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjZjBmMGYwIi8+CjxjaXJjbGUgY3g9IjYwIiBjeT0iNDUiIHI9IjIwIiBmaWxsPSIjY2NjIi8+CjxwYXRoIGQ9Ik0yMCA5NWMwLTIyIDIwLTQwIDQwLTQwczQwIDE4IDQwIDQwIiBmaWxsPSIjY2NjIi8+Cjwvc3ZnPg=="
-})
-
-// Add entrance animations
-window.addEventListener("load", () => {
-  const elements = document.querySelectorAll(".profile-section, .social-link, .message-section")
-  elements.forEach((el, index) => {
-    el.style.opacity = "0"
-    el.style.transform = "translateY(20px)"
-
-    setTimeout(() => {
-      el.style.transition = "all 0.6s ease"
-      el.style.opacity = "1"
-      el.style.transform = "translateY(0)"
-    }, index * 100)
-  })
-})
+    // Initialize page
+    console.log('Arun Bhatia website loaded successfully');
+});
