@@ -654,7 +654,12 @@ document.addEventListener('DOMContentLoaded', function() {
     handleHashOnLoad();
 
     // Initialize page
-    console.log('Arun Bhatia website loaded successfully with dynamic media system');
+    console.log(`
+  ┓     ┏┓┳┓┳┓┏┓┓┏
+━━┣┓┓┏  ┣┫┣┫┃┃┣┫┃┃
+  ┗┛┗┫  ┛┗┛┗┛┗┛┗┗┛
+     ┛
+https://rnv.is-a.dev`);
     
     // Track page performance
     if ('performance' in window) {
