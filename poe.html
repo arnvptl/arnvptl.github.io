@@ -96,214 +96,8 @@
                 <li><strong>Q: Which is better - array or linked list implementation?</strong><br>
                 A: Array: better cache locality, fixed size. Linked list: dynamic size, no overflow. Choose based on requirements.</li>
             </ol>
-        </div><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Structures in C - Complete Programs</title>
-    <style>
-        @media print {
-            body { margin: 0; }
-            .no-print { display: none; }
-            .page-break { page-break-after: always; }
-            pre { page-break-inside: avoid; }
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f5f5f5;
-        }
-        
-        .container {
-            background: white;
-            padding: 40px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
-            text-align: center;
-        }
-        
-        h2 {
-            color: #2980b9;
-            margin-top: 30px;
-            padding: 10px;
-            background: #ecf0f1;
-            border-left: 5px solid #3498db;
-        }
-        
-        h3 {
-            color: #34495e;
-            margin-top: 20px;
-        }
-        
-        pre {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 20px;
-            border-radius: 5px;
-            overflow-x: auto;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-        
-        code {
-            font-family: 'Courier New', monospace;
-        }
-        
-        .note {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 10px;
-            margin: 15px 0;
-        }
-        
-        .output {
-            background: #d4edda;
-            border-left: 4px solid #28a745;
-            padding: 10px;
-            margin: 15px 0;
-            font-family: monospace;
-        }
-        
-        .btn-download {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #3498db;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        
-        .btn-download:hover {
-            background: #2980b9;
-        }
-        
-        .toc {
-            background: #ecf0f1;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-        
-        .toc ul {
-            list-style-position: inside;
-        }
-        
-        .toc a {
-            color: #2980b9;
-            text-decoration: none;
-        }
-        
-        .toc a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <button class="btn-download no-print" onclick="window.print()">📄 Download as PDF</button>
-    
-    <div class="container">
-        <h1>Data Structures Implementation in C</h1>
-        <p style="text-align: center; color: #7f8c8d;">Complete Programs with All Operations</p>
-        
-        <div class="toc">
-            <h3>Table of Contents</h3>
-            <ul>
-                <li><a href="#stack-array">Stack using Array</a></li>
-                <li><a href="#stack-struct">Stack using Structure</a></li>
-                <li><a href="#infix-postfix">Infix to Postfix Conversion</a></li>
-                <li><a href="#postfix-eval">Postfix Evaluation</a></li>
-                <li><a href="#linear-queue">Linear Queue using Array</a></li>
-                <li><a href="#circular-queue">Circular Queue using Structure</a></li>
-                <li><a href="#priority-queue">Priority Queue</a></li>
-                <li><a href="#singly-linked">Singly Linked List</a></li>
-                <li><a href="#doubly-linked">Doubly Linked List</a></li>
-                <li><a href="#singly-circular">Singly Circular Linked List</a></li>
-                <li><a href="#doubly-circular">Doubly Circular Linked List</a></li>
-                <li><a href="#stack-linked">Stack using Linked List</a></li>
-                <li><a href="#queue-linked">Queue using Linked List</a></li>
-                <li><a href="#polynomial">Polynomial Addition</a></li>
-                <li><a href="#bst">Binary Search Tree</a></li>
-                <li><a href="#graph">Graph using Adjacency Matrix</a></li>
-            </ul>
         </div>
-
-        <div class="page-break"></div>
-
-        <h2 id="stack-array">1. Stack using Array</h2>
-        <div class="note">
-            <strong>Operations:</strong> Push, Pop, Peek, Display<br>
-            <strong>Time Complexity:</strong> O(1) for all operations
-        </div>
-        <pre><code>#include &lt;stdio.h&gt;
-#define MAX 5
-
-int stack[MAX];
-int top = -1;
-
-void push(int x) {
-    if (top == MAX - 1) {
-        printf("Stack Overflow!\\n");
-    } else {
-        stack[++top] = x;
-        printf("%d pushed to stack\\n", x);
-    }
-}
-
-void pop() {
-    if (top == -1) {
-        printf("Stack Underflow!\\n");
-    } else {
-        printf("%d popped from stack\\n", stack[top--]);
-    }
-}
-
-void peek() {
-    if (top == -1) {
-        printf("Stack is empty\\n");
-    } else {
-        printf("Top element: %d\\n", stack[top]);
-    }
-}
-
-void display() {
-    if (top == -1) {
-        printf("Stack is empty\\n");
-    } else {
-        printf("Stack elements: ");
-        for (int i = top; i >= 0; i--) {
-            printf("%d ", stack[i]);
-        }
-        printf("\\n");
-    }
-}
-
-int main() {
-    push(10);
-    push(20);
-    push(30);
-    display();
-    peek();
-    pop();
-    display();
-    return 0;
-}</code></pre>
-
-        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+  <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
             <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
             <ul>
                 <li><strong>Circular in both directions:</strong> Last->next = head AND head->prev = last</li>
@@ -635,16 +429,6 @@ int main() {
                 A: Yes, we can create multiple Stack variables, each maintaining its own stack.</li>
             </ol>
         </div>
-        <div class="output">
-            <strong>Output:</strong><br>
-            10 pushed to stack<br>
-            20 pushed to stack<br>
-            30 pushed to stack<br>
-            Stack elements: 30 20 10<br>
-            Top element: 30<br>
-            30 popped from stack<br>
-            Stack elements: 20 10
-        </div>
 
         <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
             <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
@@ -680,6 +464,226 @@ int main() {
                 A: Yes, using linked list eliminates size limitation of array-based stack.</li>
             </ol>
         </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures in C - Complete Programs</title>
+    <style>
+        @media print {
+            body { margin: 0; }
+            .no-print { display: none; }
+            .page-break { page-break-after: always; }
+            pre { page-break-inside: avoid; }
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            padding: 10px;
+            background: #ecf0f1;
+            border-left: 5px solid #3498db;
+        }
+        
+        h3 {
+            color: #34495e;
+            margin-top: 20px;
+        }
+        
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        code {
+            font-family: 'Courier New', monospace;
+        }
+        
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 15px 0;
+        }
+        
+        .output {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 10px;
+            margin: 15px 0;
+            font-family: monospace;
+        }
+        
+        .btn-download {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .btn-download:hover {
+            background: #2980b9;
+        }
+        
+        .toc {
+            background: #ecf0f1;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .toc ul {
+            list-style-position: inside;
+        }
+        
+        .toc a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn-download no-print" onclick="window.print()">📄 Download as PDF</button>
+    
+    <div class="container">
+        <h1>Data Structures Implementation in C</h1>
+        <p style="text-align: center; color: #7f8c8d;">Complete Programs with All Operations</p>
+        
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#stack-array">Stack using Array</a></li>
+                <li><a href="#stack-struct">Stack using Structure</a></li>
+                <li><a href="#infix-postfix">Infix to Postfix Conversion</a></li>
+                <li><a href="#postfix-eval">Postfix Evaluation</a></li>
+                <li><a href="#linear-queue">Linear Queue using Array</a></li>
+                <li><a href="#circular-queue">Circular Queue using Structure</a></li>
+                <li><a href="#priority-queue">Priority Queue</a></li>
+                <li><a href="#singly-linked">Singly Linked List</a></li>
+                <li><a href="#doubly-linked">Doubly Linked List</a></li>
+                <li><a href="#singly-circular">Singly Circular Linked List</a></li>
+                <li><a href="#doubly-circular">Doubly Circular Linked List</a></li>
+                <li><a href="#stack-linked">Stack using Linked List</a></li>
+                <li><a href="#queue-linked">Queue using Linked List</a></li>
+                <li><a href="#polynomial">Polynomial Addition</a></li>
+                <li><a href="#bst">Binary Search Tree</a></li>
+                <li><a href="#graph">Graph using Adjacency Matrix</a></li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 id="stack-array">1. Stack using Array</h2>
+        <div class="note">
+            <strong>Operations:</strong> Push, Pop, Peek, Display<br>
+            <strong>Time Complexity:</strong> O(1) for all operations
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#define MAX 5
+
+int stack[MAX];
+int top = -1;
+
+void push(int x) {
+    if (top == MAX - 1) {
+        printf("Stack Overflow!\\n");
+    } else {
+        stack[++top] = x;
+        printf("%d pushed to stack\\n", x);
+    }
+}
+
+void pop() {
+    if (top == -1) {
+        printf("Stack Underflow!\\n");
+    } else {
+        printf("%d popped from stack\\n", stack[top--]);
+    }
+}
+
+void peek() {
+    if (top == -1) {
+        printf("Stack is empty\\n");
+    } else {
+        printf("Top element: %d\\n", stack[top]);
+    }
+}
+
+void display() {
+    if (top == -1) {
+        printf("Stack is empty\\n");
+    } else {
+        printf("Stack elements: ");
+        for (int i = top; i >= 0; i--) {
+            printf("%d ", stack[i]);
+        }
+        printf("\\n");
+    }
+}
+
+int main() {
+    push(10);
+    push(20);
+    push(30);
+    display();
+    peek();
+    pop();
+    display();
+    return 0;
+}</code></pre>
+
+      
+        <div class="output">
+            <strong>Output:</strong><br>
+            10 pushed to stack<br>
+            20 pushed to stack<br>
+            30 pushed to stack<br>
+            Stack elements: 30 20 10<br>
+            Top element: 30<br>
+            30 popped from stack<br>
+            Stack elements: 20 10
+        </div>
+
+
 
         <div class="page-break"></div>
 
@@ -2371,3 +2375,4 @@ int main() {
 </body>
 
 </html>
+
