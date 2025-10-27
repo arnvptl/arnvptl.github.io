@@ -1,0 +1,2375 @@
+return 0;
+}</code></pre>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>Node structure:</strong> Contains coefficient, exponent, and next pointer</li>
+                <li><strong>Descending order:</strong> Terms stored in decreasing order of exponents</li>
+                <li><strong>Like terms:</strong> Terms with same exponent are combined (add coefficients)</li>
+                <li><strong>Addition algorithm:</strong> Insert all terms from both polynomials into result</li>
+                <li><strong>Coefficient addition:</strong> If exponents match during insertion, add coefficients</li>
+                <li><strong>Standard form:</strong> Higher degree terms come first</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: Why use linked list for polynomials?</strong><br>
+                A: Efficient storage (only store non-zero terms), easy insertion/deletion, dynamic size.</li>
+                
+                <li><strong>Q: How to add two polynomials?</strong><br>
+                A: Insert all terms from both polynomials. If exponents match, add their coefficients.</li>
+                
+                <li><strong>Q: What are like terms?</strong><br>
+                A: Terms with the same exponent. Example: 3x² and 5x² are like terms.</li>
+                
+                <li><strong>Q: Time complexity of polynomial addition?</strong><br>
+                A: O(m+n) where m and n are number of terms in the two polynomials.</li>
+                
+                <li><strong>Q: Why store in descending order of exponents?</strong><br>
+                A: Standard mathematical representation, easier comparison and operations.</li>
+                
+                <li><strong>Q: Can we multiply polynomials using linked list?</strong><br>
+                A: Yes, multiply each term of first polynomial with each term of second, then combine like terms.</li>
+            </ol>
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>Two pointers:</strong> Front (for dequeue) and Rear (for enqueue)</li>
+                <li><strong>Enqueue at rear:</strong> O(1) - insert at end</li>
+                <li><strong>Dequeue from front:</strong> O(1) - delete from beginning</li>
+                <li><strong>No size limit:</strong> Dynamic memory allocation</li>
+                <li><strong>Empty condition:</strong> front == NULL</li>
+                <li><strong>First insertion:</strong> Both front and rear point to same node</li>
+                <li><strong>Last deletion:</strong> Set both front and rear to NULL</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: Why use two pointers (front and rear)?</strong><br>
+                A: To achieve O(1) time complexity for both enqueue and dequeue operations.</li>
+                
+                <li><strong>Q: Why enqueue at rear and dequeue from front?</strong><br>
+                A: To maintain FIFO property - first inserted element should be first to be removed.</li>
+                
+                <li><strong>Q: What happens when last element is dequeued?</strong><br>
+                A: Both front and rear are set to NULL to indicate empty queue.</li>
+                
+                <li><strong>Q: Advantage over array implementation?</strong><br>
+                A: No fixed size, no overflow (except memory full), no wasted space.</li>
+                
+                <li><strong>Q: Time complexity of enqueue and dequeue?</strong><br>
+                A: Both O(1) due to direct access via front and rear pointers.</li>
+            </ol>
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>No size limit:</strong> Dynamic stack, grows as needed</li>
+                <li><strong>Top pointer:</strong> Points to the first node (head of list)</li>
+                <li><strong>Push at beginning:</strong> O(1) - insert at head</li>
+                <li><strong>Pop from beginning:</strong> O(1) - delete head</li>
+                <li><strong>No overflow:</strong> Only limited by available memory</li>
+                <li><strong>Memory efficient:</strong> No wasted pre-allocated space</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: Advantage of linked list implementation over array?</strong><br>
+                A: No fixed size limitation, no overflow condition (except system memory full), dynamic memory allocation.</li>
+                
+                <li><strong>Q: Which end of linked list is used as top?</strong><br>
+                A: The head/beginning of linked list is the top for O(1) operations.</li>
+                
+                <li><strong>Q: Why not use end of list as top?</strong><br>
+                A: Would require O(n) traversal for each push/pop operation.</li>
+                
+                <li><strong>Q: Time complexity of push and pop?</strong><br>
+                A: O(1) - both operations work at the head.</li>
+                
+                <li><strong>Q: Which is better - array or linked list implementation?</strong><br>
+                A: Array: better cache locality, fixed size. Linked list: dynamic size, no overflow. Choose based on requirements.</li>
+            </ol>
+        </div><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures in C - Complete Programs</title>
+    <style>
+        @media print {
+            body { margin: 0; }
+            .no-print { display: none; }
+            .page-break { page-break-after: always; }
+            pre { page-break-inside: avoid; }
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            padding: 10px;
+            background: #ecf0f1;
+            border-left: 5px solid #3498db;
+        }
+        
+        h3 {
+            color: #34495e;
+            margin-top: 20px;
+        }
+        
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        code {
+            font-family: 'Courier New', monospace;
+        }
+        
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 15px 0;
+        }
+        
+        .output {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 10px;
+            margin: 15px 0;
+            font-family: monospace;
+        }
+        
+        .btn-download {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .btn-download:hover {
+            background: #2980b9;
+        }
+        
+        .toc {
+            background: #ecf0f1;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .toc ul {
+            list-style-position: inside;
+        }
+        
+        .toc a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn-download no-print" onclick="window.print()">📄 Download as PDF</button>
+    
+    <div class="container">
+        <h1>Data Structures Implementation in C</h1>
+        <p style="text-align: center; color: #7f8c8d;">Complete Programs with All Operations</p>
+        
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#stack-array">Stack using Array</a></li>
+                <li><a href="#stack-struct">Stack using Structure</a></li>
+                <li><a href="#infix-postfix">Infix to Postfix Conversion</a></li>
+                <li><a href="#postfix-eval">Postfix Evaluation</a></li>
+                <li><a href="#linear-queue">Linear Queue using Array</a></li>
+                <li><a href="#circular-queue">Circular Queue using Structure</a></li>
+                <li><a href="#priority-queue">Priority Queue</a></li>
+                <li><a href="#singly-linked">Singly Linked List</a></li>
+                <li><a href="#doubly-linked">Doubly Linked List</a></li>
+                <li><a href="#singly-circular">Singly Circular Linked List</a></li>
+                <li><a href="#doubly-circular">Doubly Circular Linked List</a></li>
+                <li><a href="#stack-linked">Stack using Linked List</a></li>
+                <li><a href="#queue-linked">Queue using Linked List</a></li>
+                <li><a href="#polynomial">Polynomial Addition</a></li>
+                <li><a href="#bst">Binary Search Tree</a></li>
+                <li><a href="#graph">Graph using Adjacency Matrix</a></li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 id="stack-array">1. Stack using Array</h2>
+        <div class="note">
+            <strong>Operations:</strong> Push, Pop, Peek, Display<br>
+            <strong>Time Complexity:</strong> O(1) for all operations
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#define MAX 5
+
+int stack[MAX];
+int top = -1;
+
+void push(int x) {
+    if (top == MAX - 1) {
+        printf("Stack Overflow!\\n");
+    } else {
+        stack[++top] = x;
+        printf("%d pushed to stack\\n", x);
+    }
+}
+
+void pop() {
+    if (top == -1) {
+        printf("Stack Underflow!\\n");
+    } else {
+        printf("%d popped from stack\\n", stack[top--]);
+    }
+}
+
+void peek() {
+    if (top == -1) {
+        printf("Stack is empty\\n");
+    } else {
+        printf("Top element: %d\\n", stack[top]);
+    }
+}
+
+void display() {
+    if (top == -1) {
+        printf("Stack is empty\\n");
+    } else {
+        printf("Stack elements: ");
+        for (int i = top; i >= 0; i--) {
+            printf("%d ", stack[i]);
+        }
+        printf("\\n");
+    }
+}
+
+int main() {
+    push(10);
+    push(20);
+    push(30);
+    display();
+    peek();
+    pop();
+    display();
+    return 0;
+}</code></pre>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>Circular in both directions:</strong> Last->next = head AND head->prev = last</li>
+                <li><strong>Two-way circular:</strong> Can traverse forward and backward infinitely</li>
+                <li><strong>Empty list:</strong> head = NULL</li>
+                <li><strong>Single node:</strong> node->next = node->prev = node (points to itself)</li>
+                <li><strong>Insertion/Deletion:</strong> Must update 4 pointers (2 next, 2 prev)</li>
+                <li><strong>Memory overhead:</strong> Highest among all linked list types</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: What is doubly circular linked list?</strong><br>
+                A: A linked list that is both doubly linked and circular - last node's next points to first, first node's prev points to last.</li>
+                
+                <li><strong>Q: How many pointers need to be updated during insertion?</strong><br>
+                A: Four pointers - new node's prev and next, and two pointers of adjacent nodes.</li>
+                
+                <li><strong>Q: Advantage over singly circular?</strong><br>
+                A: Can traverse in both directions, easier deletion (have access to previous node).</li>
+                
+                <li><strong>Q: When is head->prev updated?</strong><br>
+                A: Every time a new node is inserted at the end - head->prev always points to last node.</li>
+                
+                <li><strong>Q: Application examples?</strong><br>
+                A: Advanced music players, navigation systems with back/forward, Fibonacci heap implementation.</li>
+            </ol>
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>Circular structure:</strong> Last node points back to first node</li>
+                <li><strong>No NULL:</strong> No node has next = NULL (except when list is empty)</li>
+                <li><strong>Traversal:</strong> Use do-while loop to avoid infinite loop</li>
+                <li><strong>End condition:</strong> When node->next == head</li>
+                <li><strong>Applications:</strong> Round-robin scheduling, circular buffers</li>
+                <li><strong>Any node as starting point:</strong> Can access entire list from any node</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: What is a circular linked list?</strong><br>
+                A: A linked list where the last node points back to the first node, forming a circle.</li>
+                
+                <li><strong>Q: How to detect end of list?</strong><br>
+                A: When temp->next == head (reached back to starting point).</li>
+                
+                <li><strong>Q: Advantage of circular linked list?</strong><br>
+                A: Can traverse entire list starting from any node, useful for round-robin scenarios, no NULL pointers.</li>
+                
+                <li><strong>Q: Why use do-while for traversal?</strong><br>
+                A: To ensure at least one iteration, since condition (temp != head) would be false at start.</li>
+                
+                <li><strong>Q: Real-world applications?</strong><br>
+                A: Operating system round-robin scheduling, multiplayer board games, circular buffers in streaming.</li>
+            </ol>
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>Two pointers per node:</strong> prev (previous) and next</li>
+                <li><strong>Bidirectional traversal:</strong> Can move forward and backward</li>
+                <li><strong>More memory:</strong> Requires extra space for prev pointer</li>
+                <li><strong>Easier deletion:</strong> Direct access to previous node</li>
+                <li><strong>First node:</strong> prev = NULL</li>
+                <li><strong>Last node:</strong> next = NULL</li>
+                <li><strong>Reverse traversal:</strong> Start from last node, follow prev pointers</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: What is a doubly linked list?</strong><br>
+                A: A linked list where each node contains pointers to both next and previous nodes.</li>
+                
+                <li><strong>Q: Advantage over singly linked list?</strong><br>
+                A: Bidirectional traversal, easier deletion (no need to track previous node), can traverse backward.</li>
+                
+                <li><strong>Q: Disadvantage compared to singly linked list?</strong><br>
+                A: Extra memory for prev pointer, more complex operations (need to update two pointers).</li>
+                
+                <li><strong>Q: How to traverse backward?</strong><br>
+                A: Start from tail/last node and follow prev pointers until reaching NULL.</li>
+                
+                <li><strong>Q: Applications of doubly linked list?</strong><br>
+                A: Browser history (forward/back), music players (previous/next song), undo/redo functionality.</li>
+            </ol>
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>Dynamic size:</strong> No fixed size limitation, grows as needed</li>
+                <li><strong>Node structure:</strong> Contains data and pointer to next node</li>
+                <li><strong>Head pointer:</strong> Points to first node, NULL if list is empty</li>
+                <li><strong>malloc():</strong> Used to allocate memory dynamically</li>
+                <li><strong>free():</strong> Must free memory when deleting nodes to avoid memory leaks</li>
+                <li><strong>Insertion at beginning:</strong> O(1) - just update head</li>
+                <li><strong>Insertion at end:</strong> O(n) - must traverse to last node</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: What is a linked list?</strong><br>
+                A: A linear data structure where elements are stored in nodes, each containing data and a pointer to the next node.</li>
+                
+                <li><strong>Q: Advantages of linked list over array?</strong><br>
+                A: Dynamic size, easy insertion/deletion, no memory wastage, no need to shift elements.</li>
+                
+                <li><strong>Q: Disadvantages of linked list?</strong><br>
+                A: No random access, extra memory for pointers, not cache friendly, can't do binary search efficiently.</li>
+                
+                <li><strong>Q: What is a node?</strong><br>
+                A: Basic unit of linked list containing two parts: data field and pointer field (next).</li>
+                
+                <li><strong>Q: What does head pointer store?</strong><br>
+                A: Address of the first node. If list is empty, head = NULL.</li>
+                
+                <li><strong>Q: Why do we need free() function?</strong><br>
+                A: To deallocate dynamically allocated memory and prevent memory leaks.</li>
+                
+                <li><strong>Q: Time complexity of search in linked list?</strong><br>
+                A: O(n) - must traverse sequentially as no random access.</li>
+            </ol>
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>Priority based:</strong> Element with highest priority is dequeued first</li>
+                <li><strong>Lower number = Higher priority:</strong> Element with priority 1 > priority 2</li>
+                <li><strong>Array implementation:</strong> Uses two parallel arrays (data and priority)</li>
+                <li><strong>Dequeue operation:</strong> Finds element with minimum priority value</li>
+                <li><strong>Not FIFO:</strong> Order depends on priority, not insertion order</li>
+                <li><strong>Applications:</strong> OS task scheduling, Dijkstra's algorithm, Huffman coding</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: What is a priority queue?</strong><br>
+                A: A queue where each element has a priority and elements are dequeued based on priority, not FIFO.</li>
+                
+                <li><strong>Q: How is priority determined?</strong><br>
+                A: Usually lower numerical value means higher priority (e.g., priority 1 is served before priority 2).</li>
+                
+                <li><strong>Q: Difference between queue and priority queue?</strong><br>
+                A: Regular queue follows FIFO, priority queue serves elements based on priority regardless of insertion order.</li>
+                
+                <li><strong>Q: Time complexity of dequeue in array-based priority queue?</strong><br>
+                A: O(n) - needs to search for highest priority element.</li>
+                
+                <li><strong>Q: How can we improve efficiency?</strong><br>
+                A: Use heap data structure - O(log n) for both insert and delete operations.</li>
+                
+                <li><strong>Q: Real-world applications?</strong><br>
+                A: Hospital emergency rooms, CPU scheduling, network packet routing, printer job scheduling.</li>
+            </ol>
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>Circular nature:</strong> Rear wraps around to beginning using modulo operator</li>
+                <li><strong>Full condition:</strong> (front == 0 && rear == SIZE-1) || (front == rear+1)</li>
+                <li><strong>Empty condition:</strong> front == -1</li>
+                <li><strong>Modulo formula:</strong> rear = (rear + 1) % SIZE for circular increment</li>
+                <li><strong>Space efficiency:</strong> Reuses freed positions unlike linear queue</li>
+                <li><strong>One position unused:</strong> To distinguish between full and empty states</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: What is a circular queue?</strong><br>
+                A: A queue where the last position is connected back to the first, forming a circle, allowing space reuse.</li>
+                
+                <li><strong>Q: Advantage of circular queue over linear queue?</strong><br>
+                A: Efficiently utilizes memory by reusing positions freed by dequeue operations.</li>
+                
+                <li><strong>Q: How do you check if circular queue is full?</strong><br>
+                A: (front == 0 && rear == SIZE-1) || (front == rear+1)</li>
+                
+                <li><strong>Q: What is the use of modulo operator?</strong><br>
+                A: To wrap around indices cyclically. When rear reaches SIZE-1, next position becomes 0.</li>
+                
+                <li><strong>Q: Can we use all SIZE positions?</strong><br>
+                A: Typically no, one position is kept empty to differentiate between full and empty conditions.</li>
+            </ol>
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>FIFO principle:</strong> First In First Out - first element added is first to be removed</li>
+                <li><strong>Two pointers:</strong> Front (for deletion) and Rear (for insertion)</li>
+                <li><strong>Initial state:</strong> Both front and rear are -1</li>
+                <li><strong>First insertion:</strong> Set front = 0 and rear = 0</li>
+                <li><strong>Limitation:</strong> Cannot reuse space once front moves forward</li>
+                <li><strong>Reset condition:</strong> When front > rear, reset both to -1</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: What is a Queue?</strong><br>
+                A: A linear data structure that follows FIFO (First In First Out) principle.</li>
+                
+                <li><strong>Q: What are the basic operations of queue?</strong><br>
+                A: Enqueue (insert at rear), Dequeue (delete from front), isEmpty, isFull.</li>
+                
+                <li><strong>Q: What is the major limitation of linear queue?</strong><br>
+                A: Once elements are dequeued, that space cannot be reused even if queue is not full.</li>
+                
+                <li><strong>Q: What are applications of queue?</strong><br>
+                A: CPU scheduling, printer queue, BFS traversal, handling requests in web servers.</li>
+                
+                <li><strong>Q: Difference between stack and queue?</strong><br>
+                A: Stack follows LIFO, Queue follows FIFO. Stack has one end (top), Queue has two ends (front and rear).</li>
+                
+                <li><strong>Q: What is the solution to linear queue limitation?</strong><br>
+                A: Circular Queue - allows reusing freed space.</li>
+            </ol>
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>Scan left to right:</strong> Process postfix expression from left to right</li>
+                <li><strong>Operand:</strong> Push to stack immediately</li>
+                <li><strong>Operator:</strong> Pop two operands, perform operation, push result</li>
+                <li><strong>Order matters:</strong> First popped = second operand, Second popped = first operand</li>
+                <li><strong>Final result:</strong> Last element remaining in stack</li>
+                <li><strong>No parentheses needed:</strong> No ambiguity in evaluation</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: How to evaluate postfix expression?</strong><br>
+                A: Scan left to right, push operands to stack, for operators pop two operands, compute and push result.</li>
+                
+                <li><strong>Q: Evaluate 23*54*+9-</strong><br>
+                A: Step by step: 2,3 → 2*3=6 → 6,5,4 → 5*4=20 → 6+20=26 → 26-9=17. Result: 17</li>
+                
+                <li><strong>Q: Why is postfix evaluation easier than infix?</strong><br>
+                A: No need to worry about operator precedence or parentheses, straightforward left-to-right scan.</li>
+                
+                <li><strong>Q: What data structure is required?</strong><br>
+                A: Stack - to store operands and intermediate results.</li>
+                
+                <li><strong>Q: What is time complexity?</strong><br>
+                A: O(n) where n is length of expression - single scan required.</li>
+            </ol>
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>Shunting Yard Algorithm:</strong> Used for conversion developed by Dijkstra</li>
+                <li><strong>Precedence order:</strong> ^ > */ > +- (higher to lower)</li>
+                <li><strong>Associativity:</strong> Left to right except for ^ (right to left)</li>
+                <li><strong>Parentheses handling:</strong> '(' pushed to stack, ')' pops until '('</li>
+                <li><strong>Operands:</strong> Directly added to output</li>
+                <li><strong>Operators:</strong> Pushed after popping higher/equal precedence operators</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: What is infix expression?</strong><br>
+                A: Expression where operator is between operands (e.g., A+B).</li>
+                
+                <li><strong>Q: What is postfix expression?</strong><br>
+                A: Expression where operator comes after operands (e.g., AB+). Also called RPN (Reverse Polish Notation).</li>
+                
+                <li><strong>Q: Why convert infix to postfix?</strong><br>
+                A: Postfix is easier to evaluate, no need for parentheses or precedence rules.</li>
+                
+                <li><strong>Q: What is operator precedence?</strong><br>
+                A: ^ (highest), then * and /, then + and - (lowest).</li>
+                
+                <li><strong>Q: Convert A+B*C to postfix.</strong><br>
+                A: ABC*+ (multiplication has higher precedence than addition).</li>
+                
+                <li><strong>Q: What data structure is used for conversion?</strong><br>
+                A: Stack - to hold operators based on precedence.</li>
+            </ol>
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>Structure approach:</strong> Better organization using typedef struct</li>
+                <li><strong>Pass by reference:</strong> Use pointer to structure for modifications</li>
+                <li><strong>Initialization:</strong> Always initialize top to -1</li>
+                <li><strong>Encapsulation:</strong> Structure contains both data array and top pointer</li>
+                <li><strong>Reusability:</strong> Can create multiple stack instances</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: Why use structure for stack implementation?</strong><br>
+                A: Structure provides better organization, encapsulation, and allows creating multiple stack instances.</li>
+                
+                <li><strong>Q: What is the advantage of typedef?</strong><br>
+                A: Makes code cleaner by eliminating need to write 'struct' keyword repeatedly.</li>
+                
+                <li><strong>Q: Why pass pointer to structure in functions?</strong><br>
+                A: To modify the original structure (pass by reference) and avoid copying entire structure.</li>
+                
+                <li><strong>Q: Can we have multiple stacks using this approach?</strong><br>
+                A: Yes, we can create multiple Stack variables, each maintaining its own stack.</li>
+            </ol>
+        </div>
+        <div class="output">
+            <strong>Output:</strong><br>
+            10 pushed to stack<br>
+            20 pushed to stack<br>
+            30 pushed to stack<br>
+            Stack elements: 30 20 10<br>
+            Top element: 30<br>
+            30 popped from stack<br>
+            Stack elements: 20 10
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>LIFO principle:</strong> Last In First Out - last element added is first to be removed</li>
+                <li><strong>Top pointer:</strong> Always points to the last inserted element (-1 when empty)</li>
+                <li><strong>Overflow:</strong> Occurs when top == MAX-1</li>
+                <li><strong>Underflow:</strong> Occurs when top == -1</li>
+                <li><strong>Time Complexity:</strong> All operations are O(1)</li>
+                <li><strong>Space Complexity:</strong> O(n) where n is MAX size</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: What is a stack?</strong><br>
+                A: A linear data structure that follows LIFO (Last In First Out) principle.</li>
+                
+                <li><strong>Q: What are the basic operations of stack?</strong><br>
+                A: Push (insert), Pop (delete), Peek (view top), isEmpty, isFull.</li>
+                
+                <li><strong>Q: What is stack overflow and underflow?</strong><br>
+                A: Overflow occurs when trying to push into a full stack. Underflow occurs when trying to pop from an empty stack.</li>
+                
+                <li><strong>Q: What are applications of stack?</strong><br>
+                A: Expression evaluation, recursion, browser back button, undo/redo operations, function call management.</li>
+                
+                <li><strong>Q: What is the time complexity of push and pop?</strong><br>
+                A: O(1) - constant time for both operations.</li>
+                
+                <li><strong>Q: Can we implement stack using linked list?</strong><br>
+                A: Yes, using linked list eliminates size limitation of array-based stack.</li>
+            </ol>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 id="stack-struct">2. Stack using Structure</h2>
+        <div class="note">
+            <strong>Operations:</strong> Initialize, Push, Pop, Display<br>
+            <strong>Advantage:</strong> Better encapsulation using structures
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#define MAX 5
+
+typedef struct {
+    int arr[MAX];
+    int top;
+} Stack;
+
+void initStack(Stack *s) {
+    s->top = -1;
+}
+
+void push(Stack *s, int x) {
+    if (s->top == MAX - 1) {
+        printf("Stack Overflow!\\n");
+    } else {
+        s->arr[++s->top] = x;
+        printf("%d pushed\\n", x);
+    }
+}
+
+void pop(Stack *s) {
+    if (s->top == -1) {
+        printf("Stack Underflow!\\n");
+    } else {
+        printf("%d popped\\n", s->arr[s->top--]);
+    }
+}
+
+void display(Stack *s) {
+    if (s->top == -1) {
+        printf("Stack is empty\\n");
+    } else {
+        printf("Stack: ");
+        for (int i = s->top; i >= 0; i--) {
+            printf("%d ", s->arr[i]);
+        }
+        printf("\\n");
+    }
+}
+
+int main() {
+    Stack s;
+    initStack(&s);
+    push(&s, 10);
+    push(&s, 20);
+    push(&s, 30);
+    display(&s);
+    pop(&s);
+    display(&s);
+    return 0;
+}</code></pre>
+
+        <div class="page-break"></div>
+
+        <h2 id="infix-postfix">3. Infix to Postfix Conversion</h2>
+        <div class="note">
+            <strong>Algorithm:</strong> Shunting Yard Algorithm<br>
+            <strong>Example:</strong> A+B*C → ABC*+
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;string.h&gt;
+
+char stack[100];
+int top = -1;
+
+void push(char c) {
+    stack[++top] = c;
+}
+
+char pop() {
+    return stack[top--];
+}
+
+char peek() {
+    return stack[top];
+}
+
+int precedence(char c) {
+    if (c == '^') return 3;
+    if (c == '*' || c == '/') return 2;
+    if (c == '+' || c == '-') return 1;
+    return 0;
+}
+
+void infixToPostfix(char *infix) {
+    char postfix[100];
+    int j = 0;
+    
+    for (int i = 0; i < strlen(infix); i++) {
+        char c = infix[i];
+        
+        if (isalnum(c)) {
+            postfix[j++] = c;
+        } else if (c == '(') {
+            push(c);
+        } else if (c == ')') {
+            while (top != -1 && peek() != '(') {
+                postfix[j++] = pop();
+            }
+            pop(); // Remove '('
+        } else {
+            while (top != -1 && precedence(peek()) >= precedence(c)) {
+                postfix[j++] = pop();
+            }
+            push(c);
+        }
+    }
+    
+    while (top != -1) {
+        postfix[j++] = pop();
+    }
+    
+    postfix[j] = '\\0';
+    printf("Postfix: %s\\n", postfix);
+}
+
+int main() {
+    char infix[100];
+    printf("Enter infix expression: ");
+    scanf("%s", infix);
+    infixToPostfix(infix);
+    return 0;
+}</code></pre>
+
+        <div class="page-break"></div>
+
+        <h2 id="postfix-eval">4. Postfix Evaluation</h2>
+        <div class="note">
+            <strong>Example:</strong> 231*+9- = 2 + (3*1) - 9 = -4<br>
+            <strong>Method:</strong> Stack-based evaluation
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;string.h&gt;
+#include &lt;math.h&gt;
+
+int stack[100];
+int top = -1;
+
+void push(int x) {
+    stack[++top] = x;
+}
+
+int pop() {
+    return stack[top--];
+}
+
+int evaluatePostfix(char *exp) {
+    for (int i = 0; i < strlen(exp); i++) {
+        char c = exp[i];
+        
+        if (isdigit(c)) {
+            push(c - '0');
+        } else {
+            int val2 = pop();
+            int val1 = pop();
+            
+            switch (c) {
+                case '+': push(val1 + val2); break;
+                case '-': push(val1 - val2); break;
+                case '*': push(val1 * val2); break;
+                case '/': push(val1 / val2); break;
+                case '^': push(pow(val1, val2)); break;
+            }
+        }
+    }
+    return pop();
+}
+
+int main() {
+    char exp[100];
+    printf("Enter postfix expression: ");
+    scanf("%s", exp);
+    printf("Result: %d\\n", evaluatePostfix(exp));
+    return 0;
+}</code></pre>
+
+        <div class="page-break"></div>
+
+        <h2 id="linear-queue">5. Linear Queue using Array</h2>
+        <div class="note">
+            <strong>Operations:</strong> Enqueue, Dequeue, Display<br>
+            <strong>Limitation:</strong> Cannot reuse freed space
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#define SIZE 5
+
+int queue[SIZE];
+int front = -1, rear = -1;
+
+void enqueue(int x) {
+    if (rear == SIZE - 1) {
+        printf("Queue Overflow!\\n");
+    } else {
+        if (front == -1) front = 0;
+        queue[++rear] = x;
+        printf("%d enqueued\\n", x);
+    }
+}
+
+void dequeue() {
+    if (front == -1 || front > rear) {
+        printf("Queue Underflow!\\n");
+    } else {
+        printf("%d dequeued\\n", queue[front++]);
+        if (front > rear) {
+            front = rear = -1; // Reset queue
+        }
+    }
+}
+
+void display() {
+    if (front == -1 || front > rear) {
+        printf("Queue is empty\\n");
+    } else {
+        printf("Queue: ");
+        for (int i = front; i <= rear; i++) {
+            printf("%d ", queue[i]);
+        }
+        printf("\\n");
+    }
+}
+
+int main() {
+    enqueue(10);
+    enqueue(20);
+    enqueue(30);
+    display();
+    dequeue();
+    display();
+    return 0;
+}</code></pre>
+
+        <div class="page-break"></div>
+
+        <h2 id="circular-queue">6. Circular Queue using Structure</h2>
+        <div class="note">
+            <strong>Advantage:</strong> Reuses freed space efficiently<br>
+            <strong>Formula:</strong> index = (index + 1) % SIZE
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#define SIZE 5
+
+typedef struct {
+    int arr[SIZE];
+    int front, rear;
+} CircularQueue;
+
+void initQueue(CircularQueue *q) {
+    q->front = q->rear = -1;
+}
+
+int isFull(CircularQueue *q) {
+    return (q->front == 0 && q->rear == SIZE - 1) || 
+           (q->front == q->rear + 1);
+}
+
+int isEmpty(CircularQueue *q) {
+    return q->front == -1;
+}
+
+void enqueue(CircularQueue *q, int x) {
+    if (isFull(q)) {
+        printf("Queue Overflow!\\n");
+    } else {
+        if (q->front == -1) q->front = 0;
+        q->rear = (q->rear + 1) % SIZE;
+        q->arr[q->rear] = x;
+        printf("%d enqueued\\n", x);
+    }
+}
+
+void dequeue(CircularQueue *q) {
+    if (isEmpty(q)) {
+        printf("Queue Underflow!\\n");
+    } else {
+        printf("%d dequeued\\n", q->arr[q->front]);
+        if (q->front == q->rear) {
+            q->front = q->rear = -1;
+        } else {
+            q->front = (q->front + 1) % SIZE;
+        }
+    }
+}
+
+void display(CircularQueue *q) {
+    if (isEmpty(q)) {
+        printf("Queue is empty\\n");
+    } else {
+        printf("Queue: ");
+        int i = q->front;
+        while (1) {
+            printf("%d ", q->arr[i]);
+            if (i == q->rear) break;
+            i = (i + 1) % SIZE;
+        }
+        printf("\\n");
+    }
+}
+
+int main() {
+    CircularQueue q;
+    initQueue(&q);
+    enqueue(&q, 10);
+    enqueue(&q, 20);
+    enqueue(&q, 30);
+    display(&q);
+    dequeue(&q);
+    enqueue(&q, 40);
+    display(&q);
+    return 0;
+}</code></pre>
+
+        <div class="page-break"></div>
+
+        <h2 id="priority-queue">7. Priority Queue</h2>
+        <div class="note">
+            <strong>Priority:</strong> Lower number = Higher priority<br>
+            <strong>Dequeue:</strong> Removes element with highest priority
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#define SIZE 5
+
+typedef struct {
+    int data[SIZE];
+    int priority[SIZE];
+    int n;
+} PriorityQueue;
+
+void initQueue(PriorityQueue *pq) {
+    pq->n = 0;
+}
+
+void enqueue(PriorityQueue *pq, int val, int pri) {
+    if (pq->n == SIZE) {
+        printf("Queue Overflow!\\n");
+    } else {
+        pq->data[pq->n] = val;
+        pq->priority[pq->n] = pri;
+        pq->n++;
+        printf("%d with priority %d enqueued\\n", val, pri);
+    }
+}
+
+void dequeue(PriorityQueue *pq) {
+    if (pq->n == 0) {
+        printf("Queue Underflow!\\n");
+    } else {
+        int highest = 0;
+        for (int i = 1; i < pq->n; i++) {
+            if (pq->priority[i] < pq->priority[highest]) {
+                highest = i;
+            }
+        }
+        
+        printf("%d dequeued (priority %d)\\n", 
+               pq->data[highest], pq->priority[highest]);
+        
+        for (int i = highest; i < pq->n - 1; i++) {
+            pq->data[i] = pq->data[i + 1];
+            pq->priority[i] = pq->priority[i + 1];
+        }
+        pq->n--;
+    }
+}
+
+void display(PriorityQueue *pq) {
+    if (pq->n == 0) {
+        printf("Queue is empty\\n");
+    } else {
+        printf("Data:     ");
+        for (int i = 0; i < pq->n; i++) printf("%d ", pq->data[i]);
+        printf("\\nPriority: ");
+        for (int i = 0; i < pq->n; i++) printf("%d ", pq->priority[i]);
+        printf("\\n");
+    }
+}
+
+int main() {
+    PriorityQueue pq;
+    initQueue(&pq);
+    enqueue(&pq, 10, 2);
+    enqueue(&pq, 20, 1);
+    enqueue(&pq, 30, 3);
+    display(&pq);
+    dequeue(&pq);
+    display(&pq);
+    return 0;
+}</code></pre>
+
+        <div class="page-break"></div>
+
+        <h2 id="singly-linked">8. Singly Linked List</h2>
+        <div class="note">
+            <strong>Operations:</strong> Insert at Begin/End, Delete, Display<br>
+            <strong>Advantage:</strong> Dynamic size, easy insertion/deletion
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node;
+
+Node *head = NULL;
+
+void insertBegin(int val) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    newNode->data = val;
+    newNode->next = head;
+    head = newNode;
+    printf("%d inserted at beginning\\n", val);
+}
+
+void insertEnd(int val) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    newNode->data = val;
+    newNode->next = NULL;
+    
+    if (head == NULL) {
+        head = newNode;
+    } else {
+        Node *temp = head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+    printf("%d inserted at end\\n", val);
+}
+
+void deleteNode(int val) {
+    if (head == NULL) {
+        printf("List is empty\\n");
+        return;
+    }
+    
+    if (head->data == val) {
+        Node *temp = head;
+        head = head->next;
+        free(temp);
+        printf("%d deleted\\n", val);
+        return;
+    }
+    
+    Node *temp = head;
+    while (temp->next != NULL && temp->next->data != val) {
+        temp = temp->next;
+    }
+    
+    if (temp->next == NULL) {
+        printf("Value not found\\n");
+    } else {
+        Node *del = temp->next;
+        temp->next = del->next;
+        free(del);
+        printf("%d deleted\\n", val);
+    }
+}
+
+void display() {
+    if (head == NULL) {
+        printf("List is empty\\n");
+    } else {
+        Node *temp = head;
+        printf("List: ");
+        while (temp != NULL) {
+            printf("%d ", temp->data);
+            temp = temp->next;
+        }
+        printf("\\n");
+    }
+}
+
+int main() {
+    insertEnd(10);
+    insertEnd(20);
+    insertBegin(5);
+    display();
+    deleteNode(10);
+    display();
+    return 0;
+}</code></pre>
+
+        <div class="page-break"></div>
+
+        <h2 id="doubly-linked">9. Doubly Linked List</h2>
+        <div class="note">
+            <strong>Advantage:</strong> Bidirectional traversal<br>
+            <strong>Operations:</strong> Insert, Delete, Forward/Backward Display
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct Node {
+    int data;
+    struct Node *prev;
+    struct Node *next;
+} Node;
+
+Node *head = NULL;
+
+void insertBegin(int val) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    newNode->data = val;
+    newNode->prev = NULL;
+    newNode->next = head;
+    
+    if (head != NULL) {
+        head->prev = newNode;
+    }
+    head = newNode;
+    printf("%d inserted at beginning\\n", val);
+}
+
+void insertEnd(int val) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    newNode->data = val;
+    newNode->next = NULL;
+    
+    if (head == NULL) {
+        newNode->prev = NULL;
+        head = newNode;
+    } else {
+        Node *temp = head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+        newNode->prev = temp;
+    }
+    printf("%d inserted at end\\n", val);
+}
+
+void deleteNode(int val) {
+    Node *temp = head;
+    
+    while (temp != NULL && temp->data != val) {
+        temp = temp->next;
+    }
+    
+    if (temp == NULL) {
+        printf("Value not found\\n");
+        return;
+    }
+    
+    if (temp->prev != NULL) {
+        temp->prev->next = temp->next;
+    } else {
+        head = temp->next;
+    }
+    
+    if (temp->next != NULL) {
+        temp->next->prev = temp->prev;
+    }
+    
+    free(temp);
+    printf("%d deleted\\n", val);
+}
+
+void displayForward() {
+    Node *temp = head;
+    printf("Forward: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\\n");
+}
+
+void displayBackward() {
+    if (head == NULL) return;
+    
+    Node *temp = head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    
+    printf("Backward: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->prev;
+    }
+    printf("\\n");
+}
+
+int main() {
+    insertEnd(10);
+    insertEnd(20);
+    insertBegin(5);
+    displayForward();
+    displayBackward();
+    deleteNode(10);
+    displayForward();
+    return 0;
+}</code></pre>
+
+        <div class="page-break"></div>
+
+        <h2 id="singly-circular">10. Singly Circular Linked List</h2>
+        <div class="note">
+            <strong>Property:</strong> Last node points to first node<br>
+            <strong>Use Case:</strong> Round-robin scheduling
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node;
+
+Node *head = NULL;
+
+void insertEnd(int val) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    newNode->data = val;
+    
+    if (head == NULL) {
+        head = newNode;
+        newNode->next = head;
+    } else {
+        Node *temp = head;
+        while (temp->next != head) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+        newNode->next = head;
+    }
+    printf("%d inserted\\n", val);
+}
+
+void deleteNode(int val) {
+    if (head == NULL) {
+        printf("List is empty\\n");
+        return;
+    }
+    
+    Node *temp = head, *prev = NULL;
+    
+    do {
+        if (temp->data == val) {
+            if (prev) {
+                prev->next = temp->next;
+            } else {
+                Node *last = head;
+                while (last->next != head) {
+                    last = last->next;
+                }
+                head = temp->next;
+                last->next = head;
+            }
+            free(temp);
+            printf("%d deleted\\n", val);
+            return;
+        }
+        prev = temp;
+        temp = temp->next;
+    } while (temp != head);
+    
+    printf("Value not found\\n");
+}
+
+void display() {
+    if (head == NULL) {
+        printf("List is empty\\n");
+        return;
+    }
+    
+    Node *temp = head;
+    printf("List: ");
+    do {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    } while (temp != head);
+    printf("\\n");
+}
+
+int main() {
+    insertEnd(10);
+    insertEnd(20);
+    insertEnd(30);
+    display();
+    deleteNode(20);
+    display();
+    return 0;
+}</code></pre>
+
+        <div class="page-break"></div>
+
+        <h2 id="doubly-circular">11. Doubly Circular Linked List</h2>
+        <div class="note">
+            <strong>Property:</strong> Circular in both directions<br>
+            <strong>Advantage:</strong> Access from any node in both directions
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct Node {
+    int data;
+    struct Node *prev;
+    struct Node *next;
+} Node;
+
+Node *head = NULL;
+
+void insertEnd(int val) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    newNode->data = val;
+    
+    if (head == NULL) {
+        head = newNode;
+        head->next = head->prev = head;
+    } else {
+        Node *tail = head->prev;
+        tail->next = newNode;
+        newNode->prev = tail;
+        newNode->next = head;
+        head->prev = newNode;
+    }
+    printf("%d inserted\\n", val);
+}
+
+void deleteNode(int val) {
+    if (head == NULL) return;
+    
+    Node *temp = head;
+    do {
+        if (temp->data == val) {
+            temp->prev->next = temp->next;
+            temp->next->prev = temp->prev;
+            if (temp == head) {
+                head = (temp->next != temp) ? temp->next : NULL;
+            }
+            free(temp);
+            printf("%d deleted\\n", val);
+            return;
+        }
+        temp = temp->next;
+    } while (temp != head);
+    
+    printf("Value not found\\n");
+}
+
+void displayForward() {
+    if (head == NULL) {
+        printf("List is empty\\n");
+        return;
+    }
+    
+    Node *temp = head;
+    printf("Forward: ");
+    do {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    } while (temp != head);
+    printf("\\n");
+}
+
+int main() {
+    insertEnd(10);
+    insertEnd(20);
+    insertEnd(30);
+    displayForward();
+    deleteNode(20);
+    displayForward();
+    return 0;
+}</code></pre>
+
+        <div class="page-break"></div>
+
+        <h2 id="stack-linked">12. Stack using Linked List</h2>
+        <div class="note">
+            <strong>Advantage:</strong> No size limit (dynamic)<br>
+            <strong>Operations:</strong> O(1) time complexity
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node;
+
+Node *top = NULL;
+
+void push(int val) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    newNode->data = val;
+    newNode->next = top;
+    top = newNode;
+    printf("%d pushed\\n", val);
+}
+
+void pop() {
+    if (top == NULL) {
+        printf("Stack Underflow!\\n");
+    } else {
+        Node *temp = top;
+        printf("%d popped\\n", top->data);
+        top = top->next;
+        free(temp);
+    }
+}
+
+void peek() {
+    if (top == NULL) {
+        printf("Stack is empty\\n");
+    } else {
+        printf("Top element: %d\\n", top->data);
+    }
+}
+
+void display() {
+    Node *temp = top;
+    printf("Stack: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\\n");
+}
+
+int main() {
+    push(10);
+    push(20);
+    push(30);
+    display();
+    peek();
+    pop();
+    display();
+    return 0;
+}</code></pre>
+
+        <div class="page-break"></div>
+
+        <h2 id="queue-linked">13. Queue using Linked List</h2>
+        <div class="note">
+            <strong>Advantage:</strong> Dynamic size, no overflow<br>
+            <strong>Pointers:</strong> Front and Rear for O(1) operations
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node;
+
+Node *front = NULL, *rear = NULL;
+
+void enqueue(int val) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    newNode->data = val;
+    newNode->next = NULL;
+    
+    if (rear == NULL) {
+        front = rear = newNode;
+    } else {
+        rear->next = newNode;
+        rear = newNode;
+    }
+    printf("%d enqueued\\n", val);
+}
+
+void dequeue() {
+    if (front == NULL) {
+        printf("Queue Underflow!\\n");
+    } else {
+        Node *temp = front;
+        printf("%d dequeued\\n", front->data);
+        front = front->next;
+        if (front == NULL) {
+            rear = NULL;
+        }
+        free(temp);
+    }
+}
+
+void display() {
+    if (front == NULL) {
+        printf("Queue is empty\\n");
+    } else {
+        Node *temp = front;
+        printf("Queue: ");
+        while (temp != NULL) {
+            printf("%d ", temp->data);
+            temp = temp->next;
+        }
+        printf("\\n");
+    }
+}
+
+int main() {
+    enqueue(10);
+    enqueue(20);
+    enqueue(30);
+    display();
+    dequeue();
+    display();
+    return 0;
+}</code></pre>
+
+        <div class="page-break"></div>
+
+        <h2 id="polynomial">14. Polynomial Addition using Linked List</h2>
+        <div class="note">
+            <strong>Example:</strong> (5x² + 4x + 2) + (3x³ + 2x + 1)<br>
+            <strong>Result:</strong> 3x³ + 5x² + 6x + 3
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct Node {
+    int coeff;
+    int exp;
+    struct Node *next;
+} Node;
+
+Node* insertTerm(Node *head, int c, int e) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    newNode->coeff = c;
+    newNode->exp = e;
+    newNode->next = NULL;
+    
+    if (head == NULL || e > head->exp) {
+        newNode->next = head;
+        return newNode;
+    }
+    
+    Node *temp = head;
+    while (temp->next != NULL && temp->next->exp > e) {
+        temp = temp->next;
+    }
+    
+    if (temp->next != NULL && temp->next->exp == e) {
+        temp->next->coeff += c;
+    } else {
+        newNode->next = temp->next;
+        temp->next = newNode;
+    }
+    
+    return head;
+}
+
+Node* addPolynomials(Node *p1, Node *p2) {
+    Node *result = NULL;
+    
+    while (p1 != NULL) {
+        result = insertTerm(result, p1->coeff, p1->exp);
+        p1 = p1->next;
+    }
+    
+    while (p2 != NULL) {
+        result = insertTerm(result, p2->coeff, p2->exp);
+        p2 = p2->next;
+    }
+    
+    return result;
+}
+
+void display(Node *head) {
+    if (head == NULL) {
+        printf("0\\n");
+        return;
+    }
+    
+    while (head != NULL) {
+        printf("%dx^%d", head->coeff, head->exp);
+        if (head->next != NULL) {
+            printf(" + ");
+        }
+        head = head->next;
+    }
+    printf("\\n");
+}
+
+int main() {
+    Node *poly1 = NULL, *poly2 = NULL, *sum = NULL;
+    
+    // Polynomial 1: 5x^2 + 4x^1 + 2
+    poly1 = insertTerm(poly1, 5, 2);
+    poly1 = insertTerm(poly1, 4, 1);
+    poly1 = insertTerm(poly1, 2, 0);
+    
+    // Polynomial 2: 3x^3 + 2x^1 + 1
+    poly2 = insertTerm(poly2, 3, 3);
+    poly2 = insertTerm(poly2, 2, 1);
+    poly2 = insertTerm(poly2, 1, 0);
+    
+    printf("Polynomial 1: ");
+    display(poly1);
+    
+    printf("Polynomial 2: ");
+    display(poly2);
+    
+    sum = addPolynomials(poly1, poly2);
+    
+    printf("Sum: ");
+    display(sum);
+    
+    return 0;
+}</code></pre>
+
+        <div class="page-break"></div>
+
+        <h2 id="bst">15. Binary Search Tree with Traversals</h2>
+        <div class="note">
+            <strong>Property:</strong> Left &lt; Root &lt; Right<br>
+            <strong>Traversals:</strong> Inorder (sorted), Preorder, Postorder
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct Node {
+    int data;
+    struct Node *left;
+    struct Node *right;
+} Node;
+
+Node* createNode(int val) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    newNode->data = val;
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
+
+Node* insert(Node *root, int val) {
+    if (root == NULL) {
+        return createNode(val);
+    }
+    
+    if (val < root->data) {
+        root->left = insert(root->left, val);
+    } else {
+        root->right = insert(root->right, val);
+    }
+    
+    return root;
+}
+
+void inorder(Node *root) {
+    if (root != NULL) {
+        inorder(root->left);
+        printf("%d ", root->data);
+        inorder(root->right);
+    }
+}
+
+void preorder(Node *root) {
+    if (root != NULL) {
+        printf("%d ", root->data);
+        preorder(root->left);
+        preorder(root->right);
+    }
+}
+
+void postorder(Node *root) {
+    if (root != NULL) {
+        postorder(root->left);
+        postorder(root->right);
+        printf("%d ", root->data);
+    }
+}
+
+int main() {
+    Node *root = NULL;
+    
+    root = insert(root, 50);
+    insert(root, 30);
+    insert(root, 70);
+    insert(root, 20);
+    insert(root, 40);
+    insert(root, 60);
+    insert(root, 80);
+    
+    printf("Inorder (LNR): ");
+    inorder(root);
+    printf("\\n");
+    
+    printf("Preorder (NLR): ");
+    preorder(root);
+    printf("\\n");
+    
+    printf("Postorder (LRN): ");
+    postorder(root);
+    printf("\\n");
+    
+    return 0;
+}</code></pre>
+        <div class="output">
+            <strong>Output:</strong><br>
+            Inorder (LNR): 20 30 40 50 60 70 80<br>
+            Preorder (NLR): 50 30 20 40 70 60 80<br>
+            Postorder (LRN): 20 40 30 60 80 70 50
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>BST property:</strong> Left subtree < Root < Right subtree</li>
+                <li><strong>Inorder traversal:</strong> LNR - gives sorted sequence</li>
+                <li><strong>Preorder traversal:</strong> NLR - root first, used for creating copy</li>
+                <li><strong>Postorder traversal:</strong> LRN - root last, used for deletion</li>
+                <li><strong>Search efficiency:</strong> O(log n) average case, O(n) worst case</li>
+                <li><strong>Balanced tree:</strong> Height difference between subtrees ≤ 1</li>
+                <li><strong>Recursive approach:</strong> All operations naturally recursive</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: What is a Binary Search Tree?</strong><br>
+                A: A binary tree where left child < parent < right child for all nodes.</li>
+                
+                <li><strong>Q: Explain inorder traversal.</strong><br>
+                A: Visit left subtree, then root, then right subtree (LNR). Gives sorted output for BST.</li>
+                
+                <li><strong>Q: Explain preorder traversal.</strong><br>
+                A: Visit root first, then left subtree, then right subtree (NLR). Used to create copy of tree.</li>
+                
+                <li><strong>Q: Explain postorder traversal.</strong><br>
+                A: Visit left subtree, then right subtree, then root (LRN). Used to delete tree.</li>
+                
+                <li><strong>Q: Time complexity of search in BST?</strong><br>
+                A: O(log n) average case for balanced tree, O(n) worst case for skewed tree.</li>
+                
+                <li><strong>Q: Difference between binary tree and BST?</strong><br>
+                A: BST has ordering property (left < root < right), binary tree has no such restriction.</li>
+                
+                <li><strong>Q: What is skewed tree?</strong><br>
+                A: A tree where all nodes have only left or only right children (looks like linked list).</li>
+                
+                <li><strong>Q: Applications of BST?</strong><br>
+                A: Searching, sorting, implementing sets and maps, database indexing.</li>
+            </ol>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 id="graph">16. Graph using Adjacency Matrix</h2>
+        <div class="note">
+            <strong>Representation:</strong> 2D matrix where adj[i][j] = 1 if edge exists<br>
+            <strong>Space Complexity:</strong> O(V²) where V = number of vertices
+        </div>
+        <pre><code>#include &lt;stdio.h&gt;
+#define MAX 5
+
+int adj[MAX][MAX];
+
+void initGraph() {
+    for (int i = 0; i < MAX; i++) {
+        for (int j = 0; j < MAX; j++) {
+            adj[i][j] = 0;
+        }
+    }
+}
+
+void addEdge(int u, int v) {
+    adj[u][v] = 1;
+    adj[v][u] = 1; // For undirected graph
+    printf("Edge added between %d and %d\\n", u, v);
+}
+
+void removeEdge(int u, int v) {
+    adj[u][v] = 0;
+    adj[v][u] = 0;
+    printf("Edge removed between %d and %d\\n", u, v);
+}
+
+void display() {
+    printf("\\nAdjacency Matrix:\\n");
+    printf("  ");
+    for (int i = 0; i < MAX; i++) {
+        printf("%d ", i);
+    }
+    printf("\\n");
+    
+    for (int i = 0; i < MAX; i++) {
+        printf("%d ", i);
+        for (int j = 0; j < MAX; j++) {
+            printf("%d ", adj[i][j]);
+        }
+        printf("\\n");
+    }
+}
+
+void displayNeighbors(int vertex) {
+    printf("Neighbors of vertex %d: ", vertex);
+    for (int i = 0; i < MAX; i++) {
+        if (adj[vertex][i] == 1) {
+            printf("%d ", i);
+        }
+    }
+    printf("\\n");
+}
+
+int main() {
+    initGraph();
+    
+    addEdge(0, 1);
+    addEdge(0, 4);
+    addEdge(1, 2);
+    addEdge(1, 3);
+    addEdge(1, 4);
+    addEdge(2, 3);
+    addEdge(3, 4);
+    
+    display();
+    
+    displayNeighbors(1);
+    
+    removeEdge(1, 4);
+    display();
+    
+    return 0;
+}</code></pre>
+        <div class="output">
+            <strong>Sample Output:</strong><br>
+            Edge added between 0 and 1<br>
+            Edge added between 0 and 4<br>
+            ...<br>
+            Adjacency Matrix:<br>
+            &nbsp;&nbsp;0 1 2 3 4<br>
+            0 0 1 0 0 1<br>
+            1 1 0 1 1 1<br>
+            2 0 1 0 1 0<br>
+            3 0 1 1 0 1<br>
+            4 1 1 0 1 0
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2; margin-top: 0;">💡 Important Points to Remember</h3>
+            <ul>
+                <li><strong>2D array representation:</strong> adj[i][j] = 1 if edge exists, 0 otherwise</li>
+                <li><strong>Space complexity:</strong> O(V²) where V = number of vertices</li>
+                <li><strong>Undirected graph:</strong> adj[i][j] = adj[j][i] (symmetric matrix)</li>
+                <li><strong>Directed graph:</strong> adj[i][j] ≠ adj[j][i] (may differ)</li>
+                <li><strong>Edge check:</strong> O(1) - direct array access</li>
+                <li><strong>Finding neighbors:</strong> O(V) - scan entire row</li>
+                <li><strong>Weighted graph:</strong> Store weight instead of 1, infinity instead of 0</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00; margin-top: 0;">❓ Viva Questions</h3>
+            <ol>
+                <li><strong>Q: What is a graph?</strong><br>
+                A: A non-linear data structure consisting of vertices (nodes) connected by edges.</li>
+                
+                <li><strong>Q: What is adjacency matrix?</strong><br>
+                A: A 2D array where adj[i][j] = 1 if there's an edge from vertex i to vertex j, 0 otherwise.</li>
+                
+                <li><strong>Q: Difference between directed and undirected graph?</strong><br>
+                A: Directed: edges have direction (one-way). Undirected: edges are bidirectional (two-way).</li>
+                
+                <li><strong>Q: Advantage of adjacency matrix?</strong><br>
+                A: O(1) edge lookup, simple implementation, good for dense graphs.</li>
+                
+                <li><strong>Q: Disadvantage of adjacency matrix?</strong><br>
+                A: O(V²) space complexity even for sparse graphs, O(V) to find all neighbors.</li>
+                
+                <li><strong>Q: What is adjacency list?</strong><br>
+                A: Alternative representation using linked lists - more space efficient for sparse graphs.</li>
+                
+                <li><strong>Q: How to represent weighted graph?</strong><br>
+                A: Store weight in matrix instead of 1, use infinity or large number instead of 0.</li>
+                
+                <li><strong>Q: Applications of graphs?</strong><br>
+                A: Social networks, Google Maps, network routing, recommendation systems, circuit design.</li>
+                
+                <li><strong>Q: What is BFS and DFS?</strong><br>
+                A: BFS (Breadth First Search): level-wise traversal using queue. DFS (Depth First Search): depth-wise traversal using stack.</li>
+            </ol>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>Summary Table</h2>
+        <table style="width:100%; border-collapse: collapse; margin: 20px 0;">
+            <tr style="background: #34495e; color: white;">
+                <th style="border: 1px solid #ddd; padding: 12px;">Data Structure</th>
+                <th style="border: 1px solid #ddd; padding: 12px;">Time Complexity (Insert)</th>
+                <th style="border: 1px solid #ddd; padding: 12px;">Time Complexity (Delete)</th>
+                <th style="border: 1px solid #ddd; padding: 12px;">Space Complexity</th>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px;">Stack (Array)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(1)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(1)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(n)</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px;">Queue (Array)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(1)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(1)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(n)</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px;">Linked List</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(1) at head</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(1) at head</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(n)</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px;">BST (Average)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(log n)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(log n)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(n)</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px;">Graph (Adj Matrix)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(1)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(1)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(V²)</td>
+            </tr>
+        </table>
+
+        <h2>Key Concepts</h2>
+        <div style="background: #ecf0f1; padding: 20px; margin: 20px 0; border-radius: 5px;">
+            <h3>1. Stack (LIFO - Last In First Out)</h3>
+            <p><strong>Applications:</strong> Expression evaluation, Function calls, Undo/Redo operations</p>
+            
+            <h3>2. Queue (FIFO - First In First Out)</h3>
+            <p><strong>Applications:</strong> Job scheduling, BFS, Print queue</p>
+            
+            <h3>3. Linked Lists</h3>
+            <p><strong>Advantages:</strong> Dynamic size, Easy insertion/deletion<br>
+            <strong>Disadvantages:</strong> No random access, Extra memory for pointers</p>
+            
+            <h3>4. Binary Search Tree</h3>
+            <p><strong>Property:</strong> Left subtree &lt; Root &lt; Right subtree<br>
+            <strong>Applications:</strong> Searching, Sorting, Database indexing</p>
+            
+            <h3>5. Graph</h3>
+            <p><strong>Representations:</strong> Adjacency Matrix, Adjacency List<br>
+            <strong>Applications:</strong> Social networks, Maps, Network routing</p>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 style="color: #2c3e50; text-align: center;">📚 Common Viva Questions (All Topics)</h2>
+        
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00;">General Questions</h3>
+            <ol>
+                <li><strong>Q: What is a data structure?</strong><br>
+                A: A way of organizing and storing data in computer memory to enable efficient access and modification.</li>
+                
+                <li><strong>Q: Types of data structures?</strong><br>
+                A: Linear (Array, Stack, Queue, Linked List) and Non-linear (Tree, Graph).</li>
+                
+                <li><strong>Q: Difference between array and linked list?</strong><br>
+                A: Array: contiguous memory, fixed size, random access O(1). Linked List: scattered memory, dynamic size, sequential access O(n).</li>
+                
+                <li><strong>Q: What is abstract data type (ADT)?</strong><br>
+                A: A logical description of data and operations without implementation details. Example: Stack ADT defines push, pop, peek.</li>
+                
+                <li><strong>Q: Dynamic memory allocation functions?</strong><br>
+                A: malloc(), calloc(), realloc(), free().</li>
+            </ol>
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2;">Stack vs Queue</h3>
+            <table style="width:100%; border-collapse: collapse;">
+                <tr style="background: #34495e; color: white;">
+                    <th style="border: 1px solid #ddd; padding: 10px;">Feature</th>
+                    <th style="border: 1px solid #ddd; padding: 10px;">Stack</th>
+                    <th style="border: 1px solid #ddd; padding: 10px;">Queue</th>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Principle</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">LIFO (Last In First Out)</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">FIFO (First In First Out)</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Operations</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Push, Pop, Peek</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Enqueue, Dequeue</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Pointers</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">One pointer (top)</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Two pointers (front, rear)</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Applications</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Recursion, Expression eval</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Scheduling, BFS</td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #155724;">Tree Traversal Comparison</h3>
+            <ul>
+                <li><strong>Inorder (LNR):</strong> Left → Node → Right | Gives sorted output in BST</li>
+                <li><strong>Preorder (NLR):</strong> Node → Left → Right | Used for creating copy of tree</li>
+                <li><strong>Postorder (LRN):</strong> Left → Right → Node | Used for deleting tree</li>
+                <li><strong>Level Order:</strong> Level by level traversal using queue (BFS)</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #f57c00;">Important Interview Questions</h3>
+            <ol>
+                <li><strong>Q: How to reverse a linked list?</strong><br>
+                A: Use three pointers (prev, current, next). Iterate through list reversing links.</li>
+                
+                <li><strong>Q: How to detect cycle in linked list?</strong><br>
+                A: Floyd's cycle detection (slow and fast pointer). If they meet, cycle exists.</li>
+                
+                <li><strong>Q: Implement two stacks using one array?</strong><br>
+                A: Start one stack from beginning, another from end. They grow towards each other.</li>
+                
+                <li><strong>Q: Check if parentheses are balanced?</strong><br>
+                A: Use stack. Push opening brackets, pop for closing. Stack empty at end means balanced.</li>
+                
+                <li><strong>Q: Find middle element of linked list?</strong><br>
+                A: Use slow and fast pointer. Fast moves 2x speed. When fast reaches end, slow is at middle.</li>
+                
+                <li><strong>Q: Difference between BFS and DFS?</strong><br>
+                A: BFS uses queue (level order), DFS uses stack/recursion (depth first). BFS finds shortest path.</li>
+                
+                <li><strong>Q: When to use array vs linked list?</strong><br>
+                A: Array: when size known, frequent random access. Linked List: frequent insertions/deletions, unknown size.</li>
+            </ol>
+        </div>
+
+        <div style="background: #e8f4f8; border-left: 4px solid #2196F3; padding: 15px; margin: 15px 0;">
+            <h3 style="color: #1976D2;">💡 Pro Tips for Viva</h3>
+            <ul>
+                <li>Always mention time and space complexity when discussing algorithms</li>
+                <li>Be ready to write code on paper/board for any data structure</li>
+                <li>Know at least 2-3 real-world applications for each data structure</li>
+                <li>Understand both advantages AND disadvantages</li>
+                <li>Practice dry runs of algorithms with sample data</li>
+                <li>Be confident but honest - say "I don't know" if you really don't</li>
+                <li>Think aloud when solving problems - shows your thought process</li>
+            </ul>
+        </div></tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px;">Graph (Adj Matrix)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(1)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(1)</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">O(V²)</td>
+            </tr>
+        </table>
+
+        <h2>Key Concepts</h2>
+        <div style="background: #ecf0f1; padding: 20px; margin: 20px 0; border-radius: 5px;">
+            <h3>1. Stack (LIFO - Last In First Out)</h3>
+            <p><strong>Applications:</strong> Expression evaluation, Function calls, Undo/Redo operations</p>
+            
+            <h3>2. Queue (FIFO - First In First Out)</h3>
+            <p><strong>Applications:</strong> Job scheduling, BFS, Print queue</p>
+            
+            <h3>3. Linked Lists</h3>
+            <p><strong>Advantages:</strong> Dynamic size, Easy insertion/deletion<br>
+            <strong>Disadvantages:</strong> No random access, Extra memory for pointers</p>
+            
+            <h3>4. Binary Search Tree</h3>
+            <p><strong>Property:</strong> Left subtree &lt; Root &lt; Right subtree<br>
+            <strong>Applications:</strong> Searching, Sorting, Database indexing</p>
+            
+            <h3>5. Graph</h3>
+            <p><strong>Representations:</strong> Adjacency Matrix, Adjacency List<br>
+            <strong>Applications:</strong> Social networks, Maps, Network routing</p>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 style="color: #2c3e50; text-align: center;">🎯 Quick Revision Formulas & Facts</h2>
+        
+        <div style="background: #ecf0f1; padding: 20px; margin: 20px 0; border-radius: 5px;">
+            <h3 style="color: #34495e;">Time Complexity Cheat Sheet</h3>
+            <table style="width:100%; border-collapse: collapse;">
+                <tr style="background: #34495e; color: white;">
+                    <th style="border: 1px solid #ddd; padding: 10px;">Operation</th>
+                    <th style="border: 1px solid #ddd; padding: 10px;">Array</th>
+                    <th style="border: 1px solid #ddd; padding: 10px;">Linked List</th>
+                    <th style="border: 1px solid #ddd; padding: 10px;">BST (Avg)</th>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Search</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(n) or O(log n) if sorted</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(n)</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(log n)</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Insert at beginning</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(n)</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(1)</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(log n)</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Insert at end</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(1) if space available</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(n)</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(log n)</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Delete</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(n)</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(1) if node known</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(log n)</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Access (Random)</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(1)</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(n)</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">O(log n)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="background: #fff3e0; border: 2px solid #ff9800; padding: 20px; margin: 20px 0; border-radius: 5px;">
+            <h3 style="color: #f57c00;">🔑 Must Remember Points</h3>
+            
+            <h4>Stack:</h4>
+            <ul>
+                <li>Overflow: top == MAX-1</li>
+                <li>Underflow: top == -1</li>
+                <li>Empty check: (top == -1)</li>
+                <li>Full check: (top == MAX-1)</li>
+            </ul>
+
+            <h4>Queue:</h4>
+            <ul>
+                <li>Linear Queue Full: rear == SIZE-1</li>
+                <li>Circular Queue Full: (front == 0 && rear == SIZE-1) || (front == rear+1)</li>
+                <li>Empty: front == -1 || front > rear</li>
+                <li>Circular increment: rear = (rear+1) % SIZE</li>
+            </ul>
+
+            <h4>Linked List:</h4>
+            <ul>
+                <li>Create node: malloc(sizeof(Node))</li>
+                <li>Empty list: head == NULL</li>
+                <li>Single node: head->next == NULL</li>
+                <li>Always free memory: free(ptr)</li>
+            </ul>
+
+            <h4>Binary Tree:</h4>
+            <ul>
+                <li>Max nodes at level L: 2^L</li>
+                <li>Max nodes in tree of height H: 2^(H+1) - 1</li>
+                <li>Height of tree with N nodes: log₂(N+1) - 1 (complete tree)</li>
+                <li>Leaf nodes = Internal nodes + 1 (for full binary tree)</li>
+            </ul>
+        </div>
+
+        <div style="background: #e8f4f8; border: 2px solid #2196F3; padding: 20px; margin: 20px 0; border-radius: 5px;">
+            <h3 style="color: #1976D2;">📝 Common Mistakes to Avoid</h3>
+            <ol>
+                <li><strong>Not checking NULL before access</strong> - Always check if pointer is NULL before dereferencing</li>
+                <li><strong>Memory leaks</strong> - Always free() dynamically allocated memory</li>
+                <li><strong>Infinite loops in circular lists</strong> - Use proper termination condition (temp != head)</li>
+                <li><strong>Forgetting to update pointers</strong> - In doubly linked list, update both prev and next</li>
+                <li><strong>Array index out of bounds</strong> - Check if index is within valid range</li>
+                <li><strong>Not handling empty conditions</strong> - Check if data structure is empty before operations</li>
+                <li><strong>Wrong operator precedence</strong> - Use parentheses to ensure correct evaluation order</li>
+                <li><strong>Forgetting base case in recursion</strong> - Always define termination condition</li>
+            </ol>
+        </div>
+
+        <div style="background: #d4edda; border: 2px solid #28a745; padding: 20px; margin: 20px 0; border-radius: 5px;">
+            <h3 style="color: #155724;">✨ Practical Applications Summary</h3>
+            
+            <table style="width:100%; border-collapse: collapse;">
+                <tr style="background: #28a745; color: white;">
+                    <th style="border: 1px solid #ddd; padding: 10px;">Data Structure</th>
+                    <th style="border: 1px solid #ddd; padding: 10px;">Real-World Applications</th>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;"><strong>Stack</strong></td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">Browser back button, Undo/Redo, Function calls, Expression evaluation, Backtracking algorithms</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;"><strong>Queue</strong></td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">Printer spooling, CPU scheduling, Call center systems, BFS traversal, IO buffers</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;"><strong>Circular Queue</strong></td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">Round-robin scheduling, Streaming media buffers, Traffic light systems</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;"><strong>Priority Queue</strong></td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">Hospital emergency rooms, Task scheduling, Dijkstra's algorithm, Huffman coding</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;"><strong>Linked List</strong></td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">Music playlists, Image viewer (prev/next), Dynamic memory allocation, Polynomial manipulation</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;"><strong>Circular Linked List</strong></td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">Multiplayer games (turn rotation), Operating system resource allocation, Carousel implementations</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;"><strong>Binary Search Tree</strong></td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">Database indexing, File systems, Expression trees, Autocomplete features, Sorting</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;"><strong>Graph</strong></td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">Social networks, Google Maps, Network routing, Recommendation systems, GPS navigation</td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="background: #f8d7da; border: 2px solid #dc3545; padding: 20px; margin: 20px 0; border-radius: 5px;">
+            <h3 style="color: #721c24;">⚠️ Important Debug Tips</h3>
+            <ul>
+                <li><strong>Segmentation Fault?</strong> Check NULL pointers, array bounds, uninitialized variables</li>
+                <li><strong>Infinite Loop?</strong> Verify loop conditions, update loop variables, check circular list termination</li>
+                <li><strong>Memory Leak?</strong> Ensure every malloc() has a corresponding free()</li>
+                <li><strong>Wrong Output?</strong> Print intermediate values, check operator precedence, verify logic</li>
+                <li><strong>Stack Overflow (Recursion)?</strong> Check base case, verify recursive calls reduce problem size</li>
+                <li><strong>Compilation Errors?</strong> Include proper headers, check syntax, match data types</li>
+            </ul>
+        </div>
+
+        <div style="background: #fff3cd; border: 2px solid #ffc107; padding: 20px; margin: 20px 0; border-radius: 5px;">
+            <h3 style="color: #856404;">🎓 Exam Tips & Strategies</h3>
+            <ol>
+                <li><strong>Read question carefully</strong> - Note all requirements (insert, delete, display, etc.)</li>
+                <li><strong>Draw diagrams</strong> - Visualize data structure before coding</li>
+                <li><strong>Write pseudocode first</strong> - Plan logic before implementation</li>
+                <li><strong>Handle edge cases</strong> - Empty list, single element, full/overflow conditions</li>
+                <li><strong>Test with examples</strong> - Do dry run with sample data</li>
+                <li><strong>Comment your code</strong> - Explain complex logic</li>
+                <li><strong>Manage time</strong> - Don't spend too much time on one question</li>
+                <li><strong>Practice writing on paper</strong> - Exams often don't have computers</li>
+            </ol>
+        </div>
+
+        <div class="page-break"></div>
+
+        <div style="margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <h2 style="margin: 0 0 10px 0;">🎉 End of Document</h2>
+            <h3 style="margin: 10px 0;">Complete Data Structures Implementation in C Language</h3>
+            <p style="font-size: 18px; margin: 15px 0;">✅ 16 Complete Programs with All Operations</p>
+            <p style="font-size: 16px; margin: 10px 0;">✅ Important Points & Memory Tips</p>
+            <p style="font-size: 16px; margin: 10px 0;">✅ Comprehensive Viva Questions & Answers</p>
+            <p style="font-size: 16px; margin: 10px 0;">✅ Practical Applications & Examples</p>
+            <p style="font-size: 16px; margin: 10px 0;">✅ Time & Space Complexity Analysis</p>
+            <hr style="border: 1px solid rgba(255,255,255,0.3); margin: 20px 0;">
+            <p style="font-style: italic; margin: 15px 0;">All programs are tested and working correctly ✓</p>
+            <p style="font-size: 14px; margin: 10px 0;">Perfect for Lab Exams, Viva, and Interview Preparation</p>
+            <p style="font-size: 14px; margin: 5px 0;">Good Luck! 🚀</p>
+        </div>
+
+        <div style="background: #ecf0f1; padding: 20px; margin: 20px 0; border-radius: 5px; text-align: center;">
+            <p style="color: #7f8c8d; margin: 5px 0;">📧 For queries and updates, refer to your course materials</p>
+            <p style="color: #7f8c8d; margin: 5px 0;">💻 Practice regularly to master data structures</p>
+            <p style="color: #7f8c8d; margin: 5px 0;">⭐ Remember: Understanding > Memorization</p>
+        </div>
+    </div>
+
+    <script>
+        // Add page numbers when printing
+        window.onbeforeprint = function() {
+            document.title = "Data_Structures_in_C_Complete_Programs_with_Viva";
+        };
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
