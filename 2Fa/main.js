@@ -1,30 +1,27 @@
-// Optimized CGPA Dashboard
+// Optimized CGPA Dashboard — UPDATED FOR NEW JSON SCHEMA
+
 let data = [], filtered = [], sorts = []
 let cgpaMode = "above"
-
-const BRANCHES = {
-  1: "Civil", 2: "Computer Science", 3: "Electrical", 4: "Electronics & Telecom", 
-  5: "Information Technology", 6: "Mechanical"
-}
 
 // Initialize
 document.addEventListener("DOMContentLoaded", () => {
   document.documentElement.setAttribute("data-theme", "dark")
-  
-  // Event listeners
+
   document.getElementById("searchInput").addEventListener("input", debounce(filter, 300))
   document.getElementById("cgpaValue").addEventListener("input", debounce(filter, 300))
   document.getElementById("cgpaToggle").addEventListener("click", toggleCgpa)
   document.getElementById("resetBtn").addEventListener("click", reset)
-  
-  document.querySelectorAll("thead th[data-col]").forEach(th => 
-    th.addEventListener("click", () => sort(th.getAttribute("data-col"))))
-  
+
+  document.querySelectorAll("thead th[data-col]").forEach(th =>
+    th.addEventListener("click", () => sort(th.getAttribute("data-col")))
+  )
+
   loadData()
   setTimeout(() => document.getElementById("loadingOverlay").style.display = "none", 500)
 })
 
-// Utilities
+// ---------------- Utilities ----------------
+
 const debounce = (fn, ms) => {
   let timer
   return (...args) => {
@@ -33,9 +30,10 @@ const debounce = (fn, ms) => {
   }
 }
 
-const parseFloat = val => {
-  const n = Number.parseFloat(val)
-  return !isNaN(n) && isFinite(n) && n > 0 && n <= 10 ? n : null
+const parseCGPA = val => {
+  if (typeof val !== "string") return null
+  const n = Number.parseFloat(val.trim())
+  return !isNaN(n) && n > 0 && n <= 10 ? n : null
 }
 
 const toast = (msg, icon = "✅") => {
@@ -46,23 +44,24 @@ const toast = (msg, icon = "✅") => {
   setTimeout(() => t.classList.remove("show"), 3000)
 }
 
-// Data loading
+// ---------------- Data Loading ----------------
+
 const loadData = () => {
-  fetch("https://rnv.is-a.dev/2Fa/all_year.json")
+  fetch("http://127.0.0.1:5500/all_year.json")
     .then(r => r.ok ? r.json() : [])
     .then(d => {
       data = d.map(item => {
-        const roll = item.roll_number || ""
-        const year = roll.substring(0, 3)
-        const branch = BRANCHES[roll.charAt(3)] || "Unknown"
-        const cgpa = parseFloat(item.cgpa)
-        
+        const usn = item.usn || ""
+        const yearCode = usn.substring(0, 3)
+
+        const cgpaNum = parseCGPA(item.cgpa)
+
         return {
           ...item,
-          year: {"240": "First", "230": "Second", "220": "Third", "210": "Final"}[year] || "Unknown",
-          branch,
-          cgpa_valid: cgpa !== null,
-          cgpa_num: cgpa || 0
+          year: { "240": "First", "230": "Second", "220": "Third", "210": "Final" }[yearCode] || "Unknown",
+          branch: item.branch || "Unknown",
+          cgpa_valid: cgpaNum !== null,
+          cgpa_num: cgpaNum || 0
         }
       })
       filter()
@@ -74,7 +73,8 @@ const loadData = () => {
     })
 }
 
-// Filtering
+// ---------------- Filtering ----------------
+
 const toggleCgpa = () => {
   cgpaMode = cgpaMode === "above" ? "below" : "above"
   document.getElementById("cgpaToggle").textContent = cgpaMode === "above" ? "≥" : "≤"
@@ -84,47 +84,51 @@ const toggleCgpa = () => {
 const filter = () => {
   const search = document.getElementById("searchInput").value.toLowerCase()
   const cgpaVal = document.getElementById("cgpaValue").value.trim()
-  
+  const cgpaFilter = parseCGPA(cgpaVal)
+
   filtered = data.filter(item => {
-    const searchMatch = !search || 
-      [item.roll_number, item.username, item.email, item.branch]
-        .some(field => (field || "").toLowerCase().includes(search))
-    
+    const searchMatch =
+      !search ||
+      [item.usn, item.name, item.email, item.branch]
+        .some(f => (f || "").toLowerCase().includes(search))
+
     let cgpaMatch = true
-    if (cgpaVal && item.cgpa_valid) {
-      const val = parseFloat(cgpaVal)
-      if (val) cgpaMatch = cgpaMode === "above" ? item.cgpa_num >= val : item.cgpa_num <= val
+    if (cgpaFilter !== null && item.cgpa_valid) {
+      cgpaMatch = cgpaMode === "above"
+        ? item.cgpa_num >= cgpaFilter
+        : item.cgpa_num <= cgpaFilter
     }
-    
+
     return searchMatch && cgpaMatch
   })
-  
-  // Apply sorting
+
   if (sorts.length) {
     filtered.sort((a, b) => {
-      for (const {col, asc} of sorts) {
+      for (const { col, asc } of sorts) {
         let A = a[col] || "", B = b[col] || ""
-        
+
         if (col === "cgpa") {
           A = a.cgpa_valid ? a.cgpa_num : -1
           B = b.cgpa_valid ? b.cgpa_num : -1
-        } else if (col === "roll_number") {
-          A = parseFloat(A) || 0
-          B = parseFloat(B) || 0
+        } else if (col === "usn") {
+          A = Number(A) || 0
+          B = Number(B) || 0
         } else {
           A = A.toString().toLowerCase()
           B = B.toString().toLowerCase()
         }
-        
+
         if (A !== B) return (A < B ? -1 : 1) * (asc ? 1 : -1)
       }
       return 0
     })
   }
-  
+
   display()
   updateStats()
 }
+
+// ---------------- Reset ----------------
 
 const reset = () => {
   document.getElementById("searchInput").value = ""
@@ -137,41 +141,33 @@ const reset = () => {
   toast("Filters reset", "🔄")
 }
 
-// Display
+// ---------------- Display ----------------
+
 const display = () => {
   const tbody = document.getElementById("dataBody")
   tbody.innerHTML = ""
-  
+
   filtered.forEach((item, i) => {
     const tr = document.createElement("tr")
-    
-    // Serial
-    tr.appendChild(Object.assign(document.createElement("td"), {textContent: i + 1}))
-    
-    // Roll
-    const rollTd = Object.assign(document.createElement("td"), {
-      textContent: item.roll_number || "",
+
+    tr.appendChild(Object.assign(document.createElement("td"), { textContent: i + 1 }))
+
+    const usnTd = Object.assign(document.createElement("td"), {
+      textContent: item.usn || "",
       className: "clickable",
       title: "Click to copy"
     })
-    rollTd.onclick = () => copy(item.roll_number || "", "Roll number")
-    tr.appendChild(rollTd)
-    
-    // Name
+    usnTd.onclick = () => copy(item.usn || "", "USN")
+    tr.appendChild(usnTd)
+
     const nameTd = Object.assign(document.createElement("td"), {
-      textContent: item.username || "",
-      className: "clickable", 
-      title: "Click to copy custom format"
+      textContent: item.name || "",
+      className: "clickable",
+      title: "Click to copy"
     })
-    nameTd.onclick = () => {
-      const name = (item.username || "").split(/\s+/)[0] || ""
-      const formatted = (name ? name[0].toUpperCase() + name.slice(1).toLowerCase() : "") + 
-                       "@" + (item.roll_number || "").slice(2).replace(/^0+/, "")
-      copy(formatted, "Custom name")
-    }
+    nameTd.onclick = () => copy(item.name || "", "Name")
     tr.appendChild(nameTd)
-    
-    // Email
+
     const emailTd = Object.assign(document.createElement("td"), {
       textContent: item.email || "",
       className: "clickable",
@@ -179,99 +175,84 @@ const display = () => {
     })
     emailTd.onclick = () => copy(item.email || "", "Email")
     tr.appendChild(emailTd)
-    
-    // CGPA
+
     const cgpaTd = document.createElement("td")
     const badge = document.createElement("span")
     badge.className = "cgpa-badge"
-    
+
     if (item.cgpa_valid) {
       const c = item.cgpa_num
       badge.textContent = c.toFixed(2)
-      badge.classList.add(c >= 9 ? "cgpa-excellent" : c >= 7.5 ? "cgpa-good" : 
-                         c >= 6 ? "cgpa-average" : "cgpa-below")
+      badge.classList.add(
+        c >= 9 ? "cgpa-excellent" :
+        c >= 7.5 ? "cgpa-good" :
+        c >= 6 ? "cgpa-average" : "cgpa-below"
+      )
     } else {
-      badge.textContent = item.cgpa || "N/A"
+      badge.textContent = "N/A"
       badge.classList.add("cgpa-invalid")
     }
+
     cgpaTd.appendChild(badge)
     tr.appendChild(cgpaTd)
-    
-    // Branch
+
     const branchTd = document.createElement("td")
-    const branchBadge = Object.assign(document.createElement("span"), {
+    branchTd.appendChild(Object.assign(document.createElement("span"), {
       className: "branch-badge",
       textContent: item.branch
-    })
-    branchTd.appendChild(branchBadge)
+    }))
     tr.appendChild(branchTd)
-    
+
     tbody.appendChild(tr)
   })
 }
 
-// Statistics
+// ---------------- Stats ----------------
+
 const updateStats = () => {
   const valid = filtered.filter(s => s.cgpa_valid)
   const cgpas = valid.map(s => s.cgpa_num)
   const avg = cgpas.length ? cgpas.reduce((a, b) => a + b) / cgpas.length : 0
-  
+
   animate(document.getElementById("totalStudents"), 0, valid.length, 800)
-  animate(document.getElementById("averageCGPA"), 0, avg, 800, 3)
+  animate(document.getElementById("averageCGPA"), 0, avg, 800, 2)
   animate(document.getElementById("excellentCount"), 0, cgpas.filter(c => c > avg).length, 800)
-  
-  document.getElementById("recordCount").textContent = 
+
+  document.getElementById("recordCount").textContent =
     `${valid.length} record${valid.length !== 1 ? "s" : ""}`
 }
 
-// Sorting
+// ---------------- Sorting ----------------
+
 const sort = col => {
   const idx = sorts.findIndex(s => s.col === col)
-  if (idx >= 0) {
-    sorts[idx].asc = !sorts[idx].asc
-  } else {
-    sorts.push({col, asc: true})
-  }
-  
+  if (idx >= 0) sorts[idx].asc = !sorts[idx].asc
+  else sorts.push({ col, asc: true })
+
   document.querySelectorAll(".sort-indicator").forEach(s => s.textContent = "")
-  sorts.forEach(({col, asc}) => {
-    const indicator = document.querySelector(`th[data-col="${col}"] .sort-indicator`)
-    if (indicator) indicator.textContent = asc ? "▲" : "▼"
+  sorts.forEach(({ col, asc }) => {
+    const el = document.querySelector(`th[data-col="${col}"] .sort-indicator`)
+    if (el) el.textContent = asc ? "▲" : "▼"
   })
-  
+
   filter()
 }
 
-// Utilities
+// ---------------- Clipboard + Animation ----------------
+
 const copy = (text, type) => {
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(text)
-      .then(() => toast(`${type} copied!`))
-      .catch(() => toast("Copy failed", "❌"))
-  } else {
-    const textarea = Object.assign(document.createElement("textarea"), {
-      value: text,
-      style: "position:fixed"
-    })
-    document.body.appendChild(textarea)
-    textarea.select()
-    try {
-      document.execCommand("copy")
-      toast(`${type} copied!`)
-    } catch {
-      toast("Copy failed", "❌")
-    }
-    document.body.removeChild(textarea)
-  }
+  navigator.clipboard.writeText(text)
+    .then(() => toast(`${type} copied!`))
+    .catch(() => toast("Copy failed", "❌"))
 }
 
 const animate = (el, start, end, duration, decimals = 0) => {
   let startTime = null
   const step = time => {
     if (!startTime) startTime = time
-    const progress = Math.min((time - startTime) / duration, 1)
-    el.textContent = (start + progress * (end - start)).toFixed(decimals)
-    if (progress < 1) requestAnimationFrame(step)
+    const p = Math.min((time - startTime) / duration, 1)
+    el.textContent = (start + p * (end - start)).toFixed(decimals)
+    if (p < 1) requestAnimationFrame(step)
   }
   requestAnimationFrame(step)
 }
